@@ -3,7 +3,7 @@
 wardl is [Wordl](https://www.nytimes.com/games/wordle/index.html) but with these important tweaks:
 TODO document wardl rules.
 
-It is a fork of the incredibly helpful (hello-wordl](https://github.com/lynn/hello-wordl). See that
+It is a fork of the incredibly helpful [hello-wordl](https://github.com/lynn/hello-wordl). See that
 repo for more on the history, word lists, etc.
 
 ## For developers
