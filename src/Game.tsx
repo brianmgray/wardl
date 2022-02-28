@@ -7,13 +7,13 @@ import targetList from "./lists/targets.json";
 import {
   describeSeed,
   dictionarySet,
-  Difficulty,
   pick,
   resetRng,
   seed,
   speak,
   urlParam,
 } from "./util";
+import { Difficulty } from './constants'
 import { decode, encode } from "./base64";
 
 enum GameState {

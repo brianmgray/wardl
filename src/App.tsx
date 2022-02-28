@@ -1,5 +1,6 @@
 import "./App.css";
-import { maxGuesses, seed, urlParam } from "./util";
+import { seed, urlParam } from "./util";
+import { MAX_GUESSES } from "./constants";
 import Game from "./Game";
 import { useEffect, useState } from "react";
 import { About } from "./About";
@@ -176,7 +177,7 @@ function App() {
         </div>
       )}
       <Game
-        maxGuesses={maxGuesses}
+        maxGuesses={MAX_GUESSES}
         hidden={page !== "game"}
         difficulty={difficulty}
         colorBlind={colorBlind}

@@ -1,6 +1,6 @@
 import { Clue } from "./clue";
 import { Row, RowState } from "./Row";
-import { maxGuesses } from "./util";
+import { MAX_GUESSES } from "./constants";
 
 export function About() {
   return (
@@ -13,7 +13,7 @@ export function About() {
         by <a href="https://twitter.com/powerlanguish">powerlanguage</a>.
       </p>
       <p>
-        You get {maxGuesses} tries to guess a target word.
+        You get {MAX_GUESSES} tries to guess a target word.
         <br />
         After each guess, you get Mastermind-style feedback.
       </p>
