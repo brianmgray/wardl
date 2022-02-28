@@ -12,6 +12,17 @@ To run the code locally, first install [Node.js and npm](https://docs.npmjs.com/
 
 Finally, `npm run deploy` will deploy your code to the `gh-pages` branch of your fork, so that everyone can play your version at https://yourname.github.io/wardl (or the name of your fork if you renamed it).
 
+See [backlog](backlog.md)
+- [ ] Convert hellow wordl to wardl
+  - [x] Limit to 5 words
+  - [ ] Understand and simplify word lists
+  - [ ] Add logic to update the target each guess, UI devmode for this
+  - [ ] Build algorithm for this, see [this question](https://stackoverflow.com/questions/2205540/algorithm-to-transform-one-word-to-another-through-valid-words)
+- [ ] Features
+  - [ ] Add social sharing, look at [lordle](https://github.com/lukevoyer/lordle)
+  - [ ] Remove ultra hard mode
+  - [ ] Add easy mode - highlight the letter that changed
+
 ## License
 
 View license at the link below!
