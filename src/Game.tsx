@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Row, RowState } from "./Row";
-import dictionary from "./dictionary.json";
+import dictionary from "./lists/dictionary.json";
 import { Clue, clue, describeClue, violation } from "./clue";
 import { Keyboard } from "./Keyboard";
-import targetList from "./targets.json";
+import targetList from "./lists/targets.json";
 import {
   describeSeed,
   dictionarySet,

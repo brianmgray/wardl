@@ -74,16 +74,15 @@ function App() {
             fontStyle: difficulty > 1 ? "italic" : "inherit",
           }}
         >
-          hell
+          Wardl
         </span>
-        o wordl
       </h1>
       <div className="top-right">
         {page !== "game" ? (
-          link("❌", "Close", "game")
+          link("✗", "Close", "game")
         ) : (
           <>
-            {link("❓", "About", "about")}
+            {link("?", "About", "about")}
             {link("⚙️", "Settings", "settings")}
           </>
         )}
