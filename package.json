@@ -19,7 +19,7 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "reduceTargets": "cd src/scripts && npm run reduceTargets",
+    "reduceTargets": "node src/scripts/reduceTargets",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
