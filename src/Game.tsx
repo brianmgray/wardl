@@ -3,7 +3,6 @@ import { Row, RowState } from "./Row";
 import dictionary from "./lists/dictionary.json";
 import { Clue, clue, describeClue, violation } from "./clue";
 import { Keyboard } from "./Keyboard";
-import targetList from "./lists/targets.json";
 import {
   Difficulty, 
   describeSeed,
@@ -16,6 +15,7 @@ import {
 } from "./util";
 import { Constants } from './constants'
 import { decode, encode } from "./base64";
+import targetList from "./lists/targets.json";
 
 enum GameState {
   Playing,

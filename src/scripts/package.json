@@ -1,0 +1,19 @@
+{
+  "name": "wardl-scripts",
+  "version": "0.1.0",
+  "description": "wardl scripts",
+  "main": "reduceTargets.js",
+  "scripts": {
+    "reduceTargets": "node reduceTargets.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brianmgray/wardl.git"
+  },
+  "author": "Brian Gray",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brianmgray/wardl/issues"
+  },
+  "homepage": "https://github.com/brianmgray/wardl#readme"
+}
