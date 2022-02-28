@@ -1,5 +1,5 @@
 import { englishNumbers, ordinal } from "./util";
-import { Difficulty } from './constants'
+import { Difficulty } from './util'
 
 export enum Clue {
   Absent,

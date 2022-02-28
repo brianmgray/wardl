@@ -5,6 +5,7 @@ import { Clue, clue, describeClue, violation } from "./clue";
 import { Keyboard } from "./Keyboard";
 import targetList from "./lists/targets.json";
 import {
+  Difficulty, 
   describeSeed,
   dictionarySet,
   pick,
@@ -13,7 +14,7 @@ import {
   speak,
   urlParam,
 } from "./util";
-import { Difficulty } from './constants'
+import { Constants } from './constants'
 import { decode, encode } from "./base64";
 
 enum GameState {
@@ -31,8 +32,6 @@ interface GameProps {
 }
 
 const targets = targetList.slice(0, targetList.indexOf("murky") + 1); // Words no rarer than this one
-const minLength = 4;
-const maxLength = 11;
 
 function randomTarget(wordLength: number): string {
   const eligible = targets.filter((word) => word.length === wordLength);
@@ -69,7 +68,7 @@ function parseUrlLength(): number {
   const lengthParam = urlParam("length");
   if (!lengthParam) return 5;
   const length = Number(lengthParam);
-  return length >= minLength && length <= maxLength ? length : 5;
+  return length >= Constants.WORD_LENGTH_MIN && length <= Constants.WORD_LENGTH_MAX ? length : 5;
 }
 
 function parseUrlGameNumber(): number {
@@ -118,7 +117,7 @@ function Game(props: GameProps) {
     }
     setChallenge("");
     const newWordLength =
-      wordLength >= minLength && wordLength <= maxLength ? wordLength : 5;
+      wordLength >= Constants.WORD_LENGTH_MIN && wordLength <= Constants.WORD_LENGTH_MAX ? wordLength : 5;
     setWordLength(newWordLength);
     setTarget(randomTarget(newWordLength));
     setHint("");
@@ -262,8 +261,8 @@ function Game(props: GameProps) {
         <label htmlFor="wordLength">Letters:</label>
         <input
           type="range"
-          min={minLength}
-          max={maxLength}
+          min={Constants.WORD_LENGTH_MIN}
+          max={Constants.WORD_LENGTH_MAX}
           id="wordLength"
           disabled={
             gameState === GameState.Playing &&

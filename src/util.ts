@@ -1,5 +1,10 @@
 import dictionary from "./lists/dictionary.json";
 
+export enum Difficulty {
+  Normal,
+  Hard,
+  UltraHard,
+}
 
 export const dictionarySet: Set<string> = new Set(dictionary);
 
