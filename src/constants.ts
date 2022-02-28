@@ -9,5 +9,7 @@ export const Constants = {
 }
   
 export const MAX_GUESSES = 6;
-export const WORD_LENGTH_MIN = 4;
-export const WORD_LENGTH_MAX = 11;
+
+// Wardl - limit to 5 letter words
+export const WORD_LENGTH_MIN = 5;
+export const WORD_LENGTH_MAX = 5;
