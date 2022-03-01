@@ -1,22 +1,28 @@
 #!/usr/bin/env node
 
-// import * as fs from "fs"
 const fs = require('fs')
-const targets = require("./../lists/targets.json")
+const targets = require("./../lists/targets.original.json")
 
-const DIR_OUTPUT = './../../target/scripts'
+// script constants
+const DIR_OUTPUT = './../lists'
 const FILE_OUTPUT = DIR_OUTPUT + "/targets.json";
+const MAX_RARITY_WORD = "murky";
+const WORD_LENGTH = 5;
 
+/**
+ * Script runner
+ */
 class Runner {
-  
-  /**
-   * Run the script
-   */
+
   go() {
     console.log("Running reduceTargets");
-    console.log(`Found ${Object.keys(targets).length} potential targets`)
+    console.log(`Found ${Object.keys(targets).length} potential targets`);
 
-    this.writeOutput(targets);
+    let updated = targets
+      .slice(0, targets.indexOf(MAX_RARITY_WORD) + 1)
+      .filter((word) => word.length === WORD_LENGTH && word !== "*****")
+
+    this.writeOutput(updated);
   }
 
   writeOutput(jsonContent) {
@@ -36,5 +42,4 @@ class Runner {
 }
 
 // run the script
-let runner = new Runner();
-runner.go()
+new Runner().go();
