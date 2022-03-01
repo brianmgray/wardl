@@ -16,6 +16,16 @@
                 "${workspaceFolder}/**/*.js"
             ],
             "cwd": "${workspaceFolder}/src/scripts/"
+        },
+        {
+            "type": "pwa-node",
+            "request": "launch",
+            "name": "Script: Reduce Dictionary",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "reduceDictionary.js",
+            "cwd": "${workspaceFolder}/src/scripts/"
         }
     ]
 }

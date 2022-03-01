@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
 const fs = require('fs')
-const targets = require("./../lists/targets.original.json")
+const targets = require("../lists/dictionary.original.json")
 
 // script constants
 const DIR_OUTPUT = './../lists'
-const FILE_OUTPUT = DIR_OUTPUT + "/targets.json";
-const MAX_RARITY_WORD = "murky";
+const FILE_OUTPUT = DIR_OUTPUT + "/dictionary.json";
 const WORD_LENGTH = 5;
 
 /**
@@ -15,15 +14,14 @@ const WORD_LENGTH = 5;
 class Runner {
 
   go() {
-    console.log("Running reduceTargets");
-    console.log(`Found ${Object.keys(targets).length} potential targets`);
+    console.log("Running reduceDictionary");
+    console.log(`Found ${Object.keys(targets).length} size dictionary`);
 
     let updated = targets
-      .slice(0, targets.indexOf(MAX_RARITY_WORD) + 1)
-      .filter((word) => word.length === WORD_LENGTH && word !== "*****")
+      .filter((word) => word.length === WORD_LENGTH)
 
     this.writeOutput(updated);
-    console.log(`Output ${Object.keys(updated).length} potential targets`);
+    console.log(`Output ${Object.keys(updated).length} size dictionary`);
   }
 
   writeOutput(jsonContent) {

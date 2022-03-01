@@ -2,7 +2,7 @@
 
 - [ ] Convert hellow wordl to wardl
   - [x] Limit to 5 words
-  - [ ] Understand and simplify word lists
+  - [x] Understand and simplify word lists
   - [ ] Add logic to update the target each guess, UI devmode for this
   - [ ] Build algorithm for this, see [this question](https://stackoverflow.com/questions/2205540/algorithm-to-transform-one-word-to-another-through-valid-words)
 - [ ] Features
