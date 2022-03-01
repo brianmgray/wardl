@@ -85,3 +85,14 @@ export function describeSeed(seed: number): string {
     return "seed " + seed;
   }
 }
+
+/**
+ * Function takes the current target and returns a valid 5 letter word that is one letter changed 
+ * @param current the current target
+ */
+export function advanceTarget(current:string, targetHistory:Array<string>):string {
+  let target = current;
+  console.log(`Advancing the target [${current}] -> [${target}]`)
+  return current;
+
+}

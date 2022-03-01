@@ -12,6 +12,7 @@ import {
   seed,
   speak,
   urlParam,
+  advanceTarget
 } from "./util";
 import { Constants } from './constants'
 import { decode, encode } from "./base64";
@@ -32,6 +33,7 @@ interface GameProps {
 }
 
 function randomTarget(wordLength: number): string {
+  console.log("randomTarget", pick(targets));
   return pick(targets);
 }
 
@@ -195,6 +197,9 @@ function Game(props: GameProps) {
         setHint(gameOver("lost"));
         setGameState(GameState.Lost);
       } else {
+        // advance the target
+        let newTarget = advanceTarget(target, []);
+        setTarget(newTarget);
         setHint("");
         speak(describeClue(clue(currentGuess, target)));
       }
