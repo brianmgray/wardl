@@ -6,4 +6,5 @@ These are all run from the ``src/scripts`` directory.
 
 Reduce the targets.json used by [hello-wordl](https://github.com/lynn/hello-wordl) to only 5 letter words.
 
-``node scripts/reduceTargets.json``
+``npm run reduceTargets``
+
