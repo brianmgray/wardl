@@ -15,7 +15,7 @@ import {
 } from "./util";
 import { Constants } from './constants'
 import { decode, encode } from "./base64";
-import targetList from "./lists/targets.json";
+import targets from "./lists/targets.json";
 
 enum GameState {
   Playing,
@@ -31,15 +31,8 @@ interface GameProps {
   keyboardLayout: string;
 }
 
-const targets = targetList.slice(0, targetList.indexOf("murky") + 1); // Words no rarer than this one
-
 function randomTarget(wordLength: number): string {
-  const eligible = targets.filter((word) => word.length === wordLength);
-  let candidate: string;
-  do {
-    candidate = pick(eligible);
-  } while (/\*/.test(candidate));
-  return candidate;
+  return pick(targets);
 }
 
 function getChallengeUrl(target: string): string {
