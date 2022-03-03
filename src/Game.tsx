@@ -30,6 +30,7 @@ interface GameProps {
   difficulty: Difficulty;
   colorBlind: boolean;
   keyboardLayout: string;
+  devmode: boolean;
 }
 
 function randomTarget(wordLength: number): string {
@@ -259,6 +260,8 @@ function Game(props: GameProps) {
               : RowState.Pending
           }
           cluedLetters={cluedLetters}
+          target={targetHistory[i]}
+          targetsEnabled={props.devmode || gameState!==GameState.Playing}
         />
       );
     });

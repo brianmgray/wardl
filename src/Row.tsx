@@ -11,6 +11,8 @@ interface RowProps {
   wordLength: number;
   cluedLetters: CluedLetter[];
   annotation?: string;
+  target?: string;
+  targetsEnabled: boolean
 }
 
 export function Row(props: RowProps) {
@@ -47,6 +49,10 @@ export function Row(props: RowProps) {
       {letterDivs}
       {props.annotation && (
         <span className="Row-annotation">{props.annotation}</span>
+      )}
+      {props.targetsEnabled && (
+        // <span className="Row-target">{props.target}</span>
+        <td className="Row-target">{props.target}</td>
       )}
     </tr>
   );

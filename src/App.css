@@ -46,6 +46,15 @@ body {
   text-align: start;
 }
 
+.Row-target {
+  font-family: monospace;
+  margin-inline-start: 16px;
+  text-align: start;
+  flex: 0;
+  min-width: 40px;
+  align-items: left;
+}
+
 .App-container {
   position: relative;
   max-width: 500px;

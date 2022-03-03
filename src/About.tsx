@@ -20,13 +20,15 @@ export function About() {
       <hr />
       <Row
         rowState={RowState.LockedIn}
-        wordLength={4}
+        wordLength={5}
         cluedLetters={[
           { clue: Clue.Absent, letter: "w" },
-          { clue: Clue.Absent, letter: "o" },
+          { clue: Clue.Correct, letter: "a" },
           { clue: Clue.Correct, letter: "r" },
           { clue: Clue.Elsewhere, letter: "d" },
+          { clue: Clue.Absent, letter: "l" },
         ]}
+        targetsEnabled={false}
       />
       <p>
         <b>W</b> and <b>O</b> aren't in the target word at all.
@@ -49,25 +51,29 @@ export function About() {
       </p>
       <Row
         rowState={RowState.LockedIn}
-        wordLength={4}
+        wordLength={5}
         cluedLetters={[
           { clue: Clue.Correct, letter: "d" },
           { clue: Clue.Correct, letter: "a" },
           { clue: Clue.Correct, letter: "r" },
-          { clue: Clue.Absent, letter: "k" },
+          { clue: Clue.Absent, letter: "e" },
+          { clue: Clue.Correct, letter: "s" },
         ]}
         annotation={"So close!"}
+        targetsEnabled={false}
       />
       <Row
         rowState={RowState.LockedIn}
-        wordLength={4}
+        wordLength={5}
         cluedLetters={[
           { clue: Clue.Correct, letter: "d" },
           { clue: Clue.Correct, letter: "a" },
           { clue: Clue.Correct, letter: "r" },
           { clue: Clue.Correct, letter: "t" },
+          { clue: Clue.Correct, letter: "s" },
         ]}
         annotation={"Got it!"}
+        targetsEnabled={false}
       />
       <p>
         Report issues{" "}

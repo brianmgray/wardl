@@ -43,6 +43,7 @@ function App() {
     "qwertyuiop-asdfghjkl-BzxcvbnmE"
   );
   const [enterLeft, setEnterLeft] = useSetting<boolean>("enter-left", false);
+  const [devmode, setDevmode] = useSetting<boolean>("devmode", false);
 
   useEffect(() => {
     document.body.className = dark ? "dark" : "";
@@ -174,6 +175,16 @@ function App() {
             />
             <label htmlFor="enter-left-setting">"Enter" on left side</label>
           </div>
+          <div>
+            <input
+              style={{ marginLeft: 20 }}
+              id="devmode"
+              type="checkbox"
+              checked={devmode}
+              onChange={() => setDevmode((x: boolean) => !x)}
+            />
+            <label htmlFor="enter-left-setting">Dev Mode</label>
+          </div>
         </div>
       )}
       <Game
@@ -185,6 +196,7 @@ function App() {
           /[BE]/g,
           (x) => (enterLeft ? "EB" : "BE")["BE".indexOf(x)]
         )}
+        devmode={devmode}
       />
     </div>
   );
