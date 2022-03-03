@@ -1,4 +1,5 @@
 import dictionary from "./lists/dictionary.json";
+import targets from "./lists/targets.json";
 
 export enum Difficulty {
   Normal,
@@ -91,8 +92,8 @@ export function describeSeed(seed: number): string {
  * @param current the current target
  */
 export function advanceTarget(current:string, targetHistory:Array<string>):string {
-  let target = current;
+  let target = pick(targets);
   console.log(`Advancing the target [${current}] -> [${target}]`)
-  return current;
+  return target;
 
 }

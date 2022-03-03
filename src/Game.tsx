@@ -82,11 +82,16 @@ function Game(props: GameProps) {
     challenge ? challenge.length : parseUrlLength()
   );
   const [gameNumber, setGameNumber] = useState(parseUrlGameNumber());
+  const [targetHistory, setTargetHistory] = useState<string[]>([]);
   const [target, setTarget] = useState(() => {
     resetRng();
     // Skip RNG ahead to the parsed initial game number:
     for (let i = 1; i < gameNumber; i++) randomTarget(wordLength);
-    return challenge || randomTarget(wordLength);
+    const newTarget = challenge || randomTarget(wordLength);
+    console.log(`newTarget: ${newTarget}`);
+    setTargetHistory([newTarget]);    // update history when this async setTarget() call executes
+    console.log(`setTargetHistory1: [${newTarget}]`);
+    return newTarget;
   });
   const [hint, setHint] = useState<string>(
     challengeError
@@ -110,11 +115,14 @@ function Game(props: GameProps) {
       // Clear the URL parameters:
       window.history.replaceState({}, document.title, window.location.pathname);
     }
-    setChallenge("");
     const newWordLength =
-      wordLength >= Constants.WORD_LENGTH_MIN && wordLength <= Constants.WORD_LENGTH_MAX ? wordLength : 5;
+    wordLength >= Constants.WORD_LENGTH_MIN && wordLength <= Constants.WORD_LENGTH_MAX ? wordLength : 5;
+    const newTarget = randomTarget(newWordLength);
+    setChallenge("");
     setWordLength(newWordLength);
-    setTarget(randomTarget(newWordLength));
+    setTarget(newTarget);
+    setTargetHistory([newTarget]);
+    console.log(`setTargetHistory2: [${newTarget}]`);
     setHint("");
     setGuesses([]);
     setCurrentGuess("");
@@ -198,8 +206,10 @@ function Game(props: GameProps) {
         setGameState(GameState.Lost);
       } else {
         // advance the target
-        let newTarget = advanceTarget(target, []);
+        let newTarget = advanceTarget(target, targetHistory);
         setTarget(newTarget);
+        setTargetHistory([...targetHistory, newTarget])
+        console.log(`setTargetHistory3: [${[...targetHistory, newTarget]}]`);
         setHint("");
         speak(describeClue(clue(currentGuess, target)));
       }
