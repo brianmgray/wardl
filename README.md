@@ -3,14 +3,15 @@
 wardl is [Wordl](https://www.nytimes.com/games/wordle/index.html) but with these important tweaks:
 TODO document wardl rules.
 
-It is a fork of the incredibly helpful [hello-wordl](https://github.com/lynn/hello-wordl). See that
-repo for more on the history, word lists, etc.
+It is a fork of the incredibly helpful [hello-wordl](https://github.com/lynn/hello-wordl) 
+([MIT License](https://github.com/lynn/hello-wordl/blob/main/LICENSE)).
 
 ## Word Lists
 
 - Targets come from [hello-wordl](https://github.com/lynn/hello-wordl)'s edits to [Peter Norvig's English word frequency list](http://norvig.com/mayzner.html). I've further reduced the list to only 5 letter words.
 
-- 
+- Dictionary (to check guesses) come from *Official Tournament and Club Word List used in North American Scrabble tournaments*. This is also from [hello-wordl](https://github.com/lynn/hello-wordl), and I don't know where this came 
+from online.
 
 ## For developers
 
