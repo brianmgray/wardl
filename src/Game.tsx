@@ -11,12 +11,14 @@ import {
   resetRng,
   seed,
   speak,
-  urlParam,
-  advanceTarget
+  urlParam
 } from "./util";
 import { Constants } from './constants'
 import { decode, encode } from "./base64";
+import TargetIndex from './targetIndex'
 import targets from "./lists/targets.json";
+
+const targetIndex = new TargetIndex(targets);
 
 enum GameState {
   Playing,
@@ -207,7 +209,7 @@ function Game(props: GameProps) {
         setGameState(GameState.Lost);
       } else {
         // advance the target
-        let newTarget = advanceTarget(target, targetHistory);
+        let newTarget = targetIndex.advanceTarget(target, targetHistory);
         setTarget(newTarget);
         setTargetHistory([...targetHistory, newTarget])
         console.log(`setTargetHistory3: [${[...targetHistory, newTarget]}]`);

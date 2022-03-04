@@ -10,3 +10,15 @@
   - [ ] Improve social sharing links
   - [ ] Update modes - easy mode (highlight changed letter), ultra hard (maybe get rid of this)
   - [ ] Improve UI around targets
+
+## Algorithm notes
+
+- [ ] BK Tree
+- [ ] Build graph on app startup: 
+  - each node is a word in the targets list
+  - permute each character, lookup in the dictionary. If it's a word
+    - is it in the graph? connect it to the first word
+    - if not, add it as a connection to the first word
+- [ ] to advance the target:
+  - find target node
+  - pick from its paths
