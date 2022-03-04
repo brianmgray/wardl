@@ -1,3 +1,5 @@
+import Prando from 'prando';
+
 import dictionary from "./lists/dictionary.json";
 import targets from "./lists/targets.json";
 
@@ -22,12 +24,18 @@ export function urlParam(name: string): string | null {
   return new URLSearchParams(window.location.search).get(name);
 }
 
-export const seed = Number(urlParam("seed"));
-const makeRandom = () => (seed ? mulberry32(seed) : () => Math.random());
-let random = makeRandom();
+export let seed : number
+let rng : Prando;
+resetRng();
+
+// const makeRandom = () => rng.next();
+// const makeRandom = () => (seed ? mulberry32(seed) : () => Math.random());
+const random = () => rng.next()
+export const skipRng = (iterations : number) => rng.skip(iterations)
 
 export function resetRng(): void {
-  random = makeRandom();
+  seed = Number(urlParam("seed"));
+  rng = new Prando(seed); // if seed is undefined, this will be unseeded (random games)
 }
 
 export function pick<T>(array: Array<T>): T {

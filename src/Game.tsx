@@ -9,6 +9,7 @@ import {
   dictionarySet,
   pick,
   resetRng,
+  skipRng,
   seed,
   speak,
   urlParam
@@ -88,8 +89,7 @@ function Game(props: GameProps) {
   const [targetHistory, setTargetHistory] = useState<string[]>([]);
   const [target, setTarget] = useState(() => {
     resetRng();
-    // Skip RNG ahead to the parsed initial game number:
-    for (let i = 1; i < gameNumber; i++) randomTarget(wordLength);
+    skipRng(gameNumber);
     const newTarget = challenge || randomTarget(wordLength);
     console.log(`newTarget: ${newTarget}`);
     setTargetHistory([newTarget]);    // update history when this async setTarget() call executes
