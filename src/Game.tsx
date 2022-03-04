@@ -7,11 +7,8 @@ import {
   Difficulty, 
   describeSeed,
   dictionarySet,
-  pick,
-  resetRng,
-  skipRng,
-  seed,
   speak,
+  seed,
   urlParam
 } from "./util";
 import { Constants } from './constants'
@@ -19,7 +16,7 @@ import { decode, encode } from "./base64";
 import TargetIndex from './targetIndex'
 import targets from "./lists/targets.json";
 
-const targetIndex = new TargetIndex(targets);
+const targetIndex = new TargetIndex(targets, seed);
 
 enum GameState {
   Playing,
@@ -36,9 +33,10 @@ interface GameProps {
   devmode: boolean;
 }
 
-function randomTarget(wordLength: number): string {
-  console.log("randomTarget", pick(targets));
-  return pick(targets);
+function pickStartingTarget(wordLength: number): string {
+  let target = targetIndex.pickStartingTarget();
+  console.log(`starting target: [${target}]`);
+  return target;
 }
 
 function getChallengeUrl(target: string): string {
@@ -88,9 +86,8 @@ function Game(props: GameProps) {
   const [gameNumber, setGameNumber] = useState(parseUrlGameNumber());
   const [targetHistory, setTargetHistory] = useState<string[]>([]);
   const [target, setTarget] = useState(() => {
-    resetRng();
-    skipRng(gameNumber);
-    const newTarget = challenge || randomTarget(wordLength);
+    targetIndex.skipAheadRng(gameNumber);
+    const newTarget = challenge || pickStartingTarget(wordLength);
     console.log(`newTarget: ${newTarget}`);
     setTargetHistory([newTarget]);    // update history when this async setTarget() call executes
     console.log(`setTargetHistory1: [${newTarget}]`);
@@ -120,7 +117,7 @@ function Game(props: GameProps) {
     }
     const newWordLength =
     wordLength >= Constants.WORD_LENGTH_MIN && wordLength <= Constants.WORD_LENGTH_MAX ? wordLength : 5;
-    const newTarget = randomTarget(newWordLength);
+    const newTarget = pickStartingTarget(newWordLength);
     setChallenge("");
     setWordLength(newWordLength);
     setTarget(newTarget);

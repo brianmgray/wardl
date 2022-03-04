@@ -1,7 +1,4 @@
-import Prando from 'prando';
-
 import dictionary from "./lists/dictionary.json";
-import targets from "./lists/targets.json";
 
 export enum Difficulty {
   Normal,
@@ -9,37 +6,20 @@ export enum Difficulty {
   UltraHard,
 }
 
+export const seed = Number(urlParam("seed"));
 export const dictionarySet: Set<string> = new Set(dictionary);
-
-function mulberry32(a: number) {
-  return function () {
-    var t = (a += 0x6d2b79f5);
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
 
 export function urlParam(name: string): string | null {
   return new URLSearchParams(window.location.search).get(name);
 }
 
-export let seed : number
-let rng : Prando;
-resetRng();
-
-// const makeRandom = () => rng.next();
-// const makeRandom = () => (seed ? mulberry32(seed) : () => Math.random());
-const random = () => rng.next()
-export const skipRng = (iterations : number) => rng.skip(iterations)
-
-export function resetRng(): void {
-  seed = Number(urlParam("seed"));
-  rng = new Prando(seed); // if seed is undefined, this will be unseeded (random games)
-}
-
+/**
+ * Pick a random element without using our seeded generator
+ * @param array 
+ * @returns a random element
+ */
 export function pick<T>(array: Array<T>): T {
-  return array[Math.floor(array.length * random())];
+  return array[Math.floor(array.length * Math.random())];
 }
 
 // https://a11y-guidelines.orange.com/en/web/components-examples/make-a-screen-reader-talk/
