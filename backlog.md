@@ -6,10 +6,11 @@
   - [x] Add logic to update the target each guess
   - [x] UI devmode/reveal for target history
   - [x] Build algorithm for this, see [this question](https://stackoverflow.com/questions/2205540/algorithm-to-transform-one-word-to-another-through-valid-words)
+  - [x] Move repo
   - [ ] UI improvements to:
-    - [ ] Remove the big target
-    - [ ] Show which letter changed
-    - [ ] Only show targets at the end
+    - [ ] Improve the target display (show at end unless debug mode)
+    - [ ] Remove console logs
+    - [ ] Replace setting with hotkey??
 - [ ] Features
   - [ ] Improve social sharing links
   - [ ] Update modes - easy mode (highlight changed letter), ultra hard (maybe get rid of this)
