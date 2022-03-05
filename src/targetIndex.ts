@@ -1,9 +1,7 @@
-
+import { PassjoinIndex } from 'mnemonist';
+import levenshteinLte1 from 'levenshtein-lte1'
 import Prando from 'prando';
 import {pick} from './util';
-
-const PassjoinIndex = require('mnemonist/passjoin-index');
-var levenshteinLte1 = require('levenshtein-lte1');
 
 /**
  * An Index that provides efficient access to targets.
@@ -13,7 +11,7 @@ var levenshteinLte1 = require('levenshtein-lte1');
  * @see https://stackoverflow.com/questions/2205540/algorithm-to-transform-one-word-to-another-through-valid-words
  */
 class TargetIndex {
-  #index: any;
+  #index: PassjoinIndex<string>;
   #rng : Prando;
 
   /**
@@ -45,10 +43,13 @@ class TargetIndex {
    */
   advanceTarget(current: string, targetHistory: string[]): string {
     let possible: string[] = Array.from(this.#index.search(current));
-    possible = possible.filter((t) => t === current);
+    if (possible.length > targetHistory.length) {
+      // if we have multiple to choose from, remove any we have already used
+      possible = possible.filter(t => !targetHistory.includes(t));
+    }
     console.log(`TargetIndex.advance | possible | ${possible}`)
-    let next = pick(Array.from(possible));
-    console.log(`TargetIndex.advance | [${current}] -> [${next}]`)
+    let next = pick(possible);
+    console.log(`TargetIndex.advance | next | [${current}] -> [${next}]`)
     return next;
   }
 

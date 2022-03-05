@@ -6,6 +6,8 @@
   - [x] Add logic to update the target each guess
   - [x] UI devmode/reveal for target history
   - [ ] Build algorithm for this, see [this question](https://stackoverflow.com/questions/2205540/algorithm-to-transform-one-word-to-another-through-valid-words)
+    - [ ] why is an extra target appearing
+    - [ ] reduce cases in word is changed to same word
 - [ ] Features
   - [ ] Improve social sharing links
   - [ ] Update modes - easy mode (highlight changed letter), ultra hard (maybe get rid of this)

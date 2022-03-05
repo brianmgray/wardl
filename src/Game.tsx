@@ -33,12 +33,6 @@ interface GameProps {
   devmode: boolean;
 }
 
-function pickStartingTarget(wordLength: number): string {
-  let target = targetIndex.pickStartingTarget();
-  console.log(`starting target: [${target}]`);
-  return target;
-}
-
 function getChallengeUrl(target: string): string {
   return (
     window.location.origin +
@@ -87,10 +81,10 @@ function Game(props: GameProps) {
   const [targetHistory, setTargetHistory] = useState<string[]>([]);
   const [target, setTarget] = useState(() => {
     targetIndex.skipAheadRng(gameNumber);
-    const newTarget = challenge || pickStartingTarget(wordLength);
-    console.log(`newTarget: ${newTarget}`);
+    const newTarget = challenge || targetIndex.pickStartingTarget();
     setTargetHistory([newTarget]);    // update history when this async setTarget() call executes
-    console.log(`setTargetHistory1: [${newTarget}]`);
+    // console.log(`setTargetHistory1: [${newTarget}]`);
+    console.log(`\t changing target 1: ${newTarget}`);
     return newTarget;
   });
   const [hint, setHint] = useState<string>(
@@ -117,9 +111,10 @@ function Game(props: GameProps) {
     }
     const newWordLength =
     wordLength >= Constants.WORD_LENGTH_MIN && wordLength <= Constants.WORD_LENGTH_MAX ? wordLength : 5;
-    const newTarget = pickStartingTarget(newWordLength);
+    const newTarget = targetIndex.pickStartingTarget();
     setChallenge("");
     setWordLength(newWordLength);
+    console.log(`\t changing target 2: ${newTarget}`);
     setTarget(newTarget);
     setTargetHistory([newTarget]);
     console.log(`setTargetHistory2: [${newTarget}]`);
@@ -207,9 +202,10 @@ function Game(props: GameProps) {
       } else {
         // advance the target
         let newTarget = targetIndex.advanceTarget(target, targetHistory);
+        console.log(`\t changing target 3: ${newTarget}`);
         setTarget(newTarget);
         setTargetHistory([...targetHistory, newTarget])
-        console.log(`setTargetHistory3: [${[...targetHistory, newTarget]}]`);
+        // console.log(`setTargetHistory3: [${[...targetHistory, newTarget]}]`);
         setHint("");
         speak(describeClue(clue(currentGuess, target)));
       }
