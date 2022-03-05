@@ -3,8 +3,9 @@
 wardl is [Wordl](https://www.nytimes.com/games/wordle/index.html) but with these important tweaks:
 TODO document wardl rules.
 
-It is a fork of the incredibly helpful [hello-wordl](https://github.com/lynn/hello-wordl) 
-([MIT License](https://github.com/lynn/hello-wordl/blob/main/LICENSE)).
+Originally a fork of the incredibly helpful [hello-wordl](https://github.com/lynn/hello-wordl), 
+provided via an ([MIT License](https://github.com/lynn/hello-wordl/blob/main/LICENSE)). This project changed the 
+game significantly enough that I can't make PRs, so I made a separate repo.
 
 ## Word Lists
 
