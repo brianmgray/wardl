@@ -30,7 +30,6 @@ interface GameProps {
   difficulty: Difficulty;
   colorBlind: boolean;
   keyboardLayout: string;
-  devmode: boolean;
 }
 
 function getChallengeUrl(target: string): string {
@@ -78,6 +77,7 @@ function Game(props: GameProps) {
     challenge ? challenge.length : parseUrlLength()
   );
   const [gameNumber, setGameNumber] = useState(parseUrlGameNumber());
+  const [devmode, setDevmode] = useState<boolean>(false);
   const [targetHistory, setTargetHistory] = useState<string[]>([]);
   const [target, setTarget] = useState(() => {
     targetIndex.skipAheadRng(gameNumber);
@@ -220,6 +220,15 @@ function Game(props: GameProps) {
       if (e.key === "Backspace") {
         e.preventDefault();
       }
+      if ((e.ctrlKey || e.metaKey) && e.key === "d") {
+        // setDevmode(prevDevmode => !prevDevmode); // to depend on previous value, must use a fxn
+        setDevmode(prevDevmode => {
+          console.log(`Toggling devmode: ${!prevDevmode}`);
+          return !prevDevmode
+        }); 
+        
+        e.preventDefault();
+      }
     };
     document.addEventListener("keydown", onKeyDown);
     return () => {
@@ -256,7 +265,7 @@ function Game(props: GameProps) {
           }
           cluedLetters={cluedLetters}
           target={targetHistory[i]}
-          targetsEnabled={props.devmode || gameState!==GameState.Playing}
+          showTargets={devmode || gameState !== GameState.Playing}
         />
       );
     });
@@ -269,7 +278,7 @@ function Game(props: GameProps) {
           disabled={gameState !== GameState.Playing || guesses.length === 0}
           onClick={() => {
             setHint(
-              `The answer was ${target.toUpperCase()}. (Enter to play again)`
+              `Displaying targets above. (Enter to play again)`
             );
             setGameState(GameState.Lost);
             (document.activeElement as HTMLElement)?.blur();

@@ -53,6 +53,7 @@ body {
   flex: 0;
   min-width: 40px;
   align-items: left;
+  /* TODO enable animation */
 }
 
 .App-container {

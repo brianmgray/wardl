@@ -28,7 +28,7 @@ export function About() {
           { clue: Clue.Elsewhere, letter: "d" },
           { clue: Clue.Absent, letter: "l" },
         ]}
-        targetsEnabled={false}
+        showTargets={false}
       />
       <p>
         <b>W</b> and <b>O</b> aren't in the target word at all.
@@ -60,7 +60,7 @@ export function About() {
           { clue: Clue.Correct, letter: "s" },
         ]}
         annotation={"So close!"}
-        targetsEnabled={false}
+        showTargets={false}
       />
       <Row
         rowState={RowState.LockedIn}
@@ -73,7 +73,7 @@ export function About() {
           { clue: Clue.Correct, letter: "s" },
         ]}
         annotation={"Got it!"}
-        targetsEnabled={false}
+        showTargets={false}
       />
       <p>
         Report issues{" "}

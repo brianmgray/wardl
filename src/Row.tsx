@@ -12,7 +12,7 @@ interface RowProps {
   cluedLetters: CluedLetter[];
   annotation?: string;
   target?: string;
-  targetsEnabled: boolean
+  showTargets?: boolean
 }
 
 export function Row(props: RowProps) {
@@ -50,8 +50,7 @@ export function Row(props: RowProps) {
       {props.annotation && (
         <span className="Row-annotation">{props.annotation}</span>
       )}
-      {props.targetsEnabled && (
-        // <span className="Row-target">{props.target}</span>
+      {props.showTargets && (
         <td className="Row-target">{props.target}</td>
       )}
     </tr>
