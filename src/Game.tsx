@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Row, RowState } from "./Row";
-import dictionary from "./lists/dictionary.json";
+import dictionary from "./data/dictionary.json";
 import { Clue, clue, describeClue, violation } from "./clue";
 import { Keyboard } from "./Keyboard";
 import {
@@ -15,7 +15,7 @@ import {
 import { Constants } from './constants'
 import { decode, encode } from "./base64";
 import TargetIndex from './targetIndex'
-import targets from "./lists/targets.json";
+import targets from "./data/targets.json";
 
 const targetIndex = new TargetIndex(targets, seed);
 

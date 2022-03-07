@@ -1,4 +1,4 @@
-import dictionary from "./lists/dictionary.json";
+import dictionary from "./data/dictionary.json";
 
 const ENABLE_DEBUG_TARGETS = true;
 
