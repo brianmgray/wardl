@@ -1,6 +1,5 @@
 import dictionary from "./data/dictionary.json";
-
-const ENABLE_DEBUG_TARGETS = true;
+import constants from "./data/constants.json"
 
 export enum Difficulty {
   Normal,
@@ -69,7 +68,7 @@ export function describeSeed(seed: number): string {
 }
 
 export function conditionalDebug(log:string): void {
-  if (ENABLE_DEBUG_TARGETS) {
+  if (constants.ENABLE_DEBUG_TARGETS) {
     console.log(log);
   }
 }
