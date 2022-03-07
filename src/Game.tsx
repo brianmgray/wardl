@@ -9,7 +9,8 @@ import {
   dictionarySet,
   speak,
   seed,
-  urlParam
+  urlParam,
+  conditionalDebug
 } from "./util";
 import { Constants } from './constants'
 import { decode, encode } from "./base64";
@@ -83,8 +84,7 @@ function Game(props: GameProps) {
     targetIndex.skipAheadRng(gameNumber);
     const newTarget = challenge || targetIndex.pickStartingTarget();
     setTargetHistory([newTarget]);    // update history when this async setTarget() call executes
-    // console.log(`setTargetHistory1: [${newTarget}]`);
-    console.log(`\t changing target 1: ${newTarget}`);
+    conditionalDebug(`\t changing target 1: ${newTarget}`);
     return newTarget;
   });
   const [hint, setHint] = useState<string>(
@@ -114,10 +114,10 @@ function Game(props: GameProps) {
     const newTarget = targetIndex.pickStartingTarget();
     setChallenge("");
     setWordLength(newWordLength);
-    console.log(`\t changing target 2: ${newTarget}`);
+    conditionalDebug(`\t changing target 2: ${newTarget}`);
     setTarget(newTarget);
     setTargetHistory([newTarget]);
-    console.log(`setTargetHistory2: [${newTarget}]`);
+    conditionalDebug(`setTargetHistory2: [${newTarget}]`);
     setHint("");
     setGuesses([]);
     setCurrentGuess("");
@@ -189,9 +189,7 @@ function Game(props: GameProps) {
       setCurrentGuess((guess) => "");
 
       const gameOver = (verbed: string) =>
-        `You ${verbed}! The final answer was ${target.toUpperCase()}. (Enter to ${
-          challenge ? "play a random game" : "play again"
-        })`;
+        `You ${verbed}! The final answer was ${target.toUpperCase()}.`
 
       if (currentGuess === target) {
         setHint(gameOver("won"));
@@ -202,10 +200,9 @@ function Game(props: GameProps) {
       } else {
         // advance the target
         let newTarget = targetIndex.advanceTarget(target, targetHistory);
-        console.log(`\t changing target 3: ${newTarget}`);
+        conditionalDebug(`\t changing target 3: ${newTarget}`);
         setTarget(newTarget);
         setTargetHistory([...targetHistory, newTarget])
-        // console.log(`setTargetHistory3: [${[...targetHistory, newTarget]}]`);
         setHint("");
         speak(describeClue(clue(currentGuess, target)));
       }
@@ -221,12 +218,9 @@ function Game(props: GameProps) {
         e.preventDefault();
       }
       if ((e.ctrlKey || e.metaKey) && e.key === "d") {
-        // setDevmode(prevDevmode => !prevDevmode); // to depend on previous value, must use a fxn
         e.preventDefault();
-        setDevmode(prevDevmode => {
-          console.log(`Toggling devmode: ${!prevDevmode}`);
-          return !prevDevmode
-        }); 
+        setDevmode(prevDevmode => !prevDevmode); // to depend on previous value, must use a fxn
+        
       }
     };
     document.addEventListener("keydown", onKeyDown);

@@ -8,6 +8,9 @@
   - [x] Build algorithm for this, see [this question](https://stackoverflow.com/questions/2205540/algorithm-to-transform-one-word-to-another-through-valid-words)
   - [x] Move repo
   - [x] UI improvements to improve the target display and remove the devmode setting
+  - [ ] Start on today
+  - [ ] Remove random link, move to shortcut
+- [ ] Pipeline/promote
 - [ ] Features
   - [ ] Improve social sharing links
   - [ ] Update modes - easy mode (highlight changed letter), ultra hard (maybe get rid of this)

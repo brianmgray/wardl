@@ -1,7 +1,7 @@
 import { PassjoinIndex } from 'mnemonist';
 import levenshteinLte1 from 'levenshtein-lte1'
 import Prando from 'prando';
-import {pick} from './util';
+import {conditionalDebug} from './util';
 
 /**
  * An Index that provides efficient access to targets.
@@ -30,8 +30,8 @@ class TargetIndex {
    */
   pickStartingTarget():string {
     let values = Array.from(this.#index.values());
-    let random = values[Math.floor(values.length * this.#rng.next())];
-    console.log(`TargetIndex.pickStartingTarget | ${random} | of ${values.length} values`);
+    let random = this.#rng.nextArrayItem(values);
+    conditionalDebug(`TargetIndex.pickStartingTarget | ${random} | of ${values.length} values`);
     return "" + random;
   }
 
@@ -47,9 +47,9 @@ class TargetIndex {
       // if we have multiple to choose from, remove any we have already used
       possible = possible.filter(t => !targetHistory.includes(t));
     }
-    console.log(`TargetIndex.advance | possible | ${possible}`)
-    let next = pick(possible);
-    console.log(`TargetIndex.advance | next | [${current}] -> [${next}]`)
+    conditionalDebug(`TargetIndex.advance | possible | ${possible}`)
+    let next = this.#rng.nextArrayItem(possible);
+    conditionalDebug(`TargetIndex.advance | next | [${current}] -> [${next}]`)
     return next;
   }
 

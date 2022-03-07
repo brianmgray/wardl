@@ -1,5 +1,7 @@
 import dictionary from "./lists/dictionary.json";
 
+const ENABLE_DEBUG_TARGETS = true;
+
 export enum Difficulty {
   Normal,
   Hard,
@@ -11,15 +13,6 @@ export const dictionarySet: Set<string> = new Set(dictionary);
 
 export function urlParam(name: string): string | null {
   return new URLSearchParams(window.location.search).get(name);
-}
-
-/**
- * Pick a random element without using our seeded generator
- * @param array 
- * @returns a random element
- */
-export function pick<T>(array: Array<T>): T {
-  return array[Math.floor(array.length * Math.random())];
 }
 
 // https://a11y-guidelines.orange.com/en/web/components-examples/make-a-screen-reader-talk/
@@ -72,5 +65,11 @@ export function describeSeed(seed: number): string {
     });
   } else {
     return "seed " + seed;
+  }
+}
+
+export function conditionalDebug(log:string): void {
+  if (ENABLE_DEBUG_TARGETS) {
+    console.log(log);
   }
 }
