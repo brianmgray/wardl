@@ -7,10 +7,7 @@
   - [x] UI devmode/reveal for target history
   - [x] Build algorithm for this, see [this question](https://stackoverflow.com/questions/2205540/algorithm-to-transform-one-word-to-another-through-valid-words)
   - [x] Move repo
-  - [ ] UI improvements to:
-    - [ ] Improve the target display (show at end unless debug mode)
-    - [ ] Remove console logs
-    - [ ] Replace setting with hotkey??
+  - [x] UI improvements to improve the target display and remove the devmode setting
 - [ ] Features
   - [ ] Improve social sharing links
   - [ ] Update modes - easy mode (highlight changed letter), ultra hard (maybe get rid of this)
