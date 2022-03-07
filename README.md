@@ -1,5 +1,7 @@
 # wardl
 
+## Play at [wardl.co](http://wardl.co)
+
 wardl is [Wordl](https://www.nytimes.com/games/wordle/index.html) but with these important tweaks:
 TODO document wardl rules.
 
