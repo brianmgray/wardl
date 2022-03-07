@@ -189,7 +189,7 @@ function Game(props: GameProps) {
       setCurrentGuess((guess) => "");
 
       const gameOver = (verbed: string) =>
-        `You ${verbed}! The answer was ${target.toUpperCase()}. (Enter to ${
+        `You ${verbed}! The final answer was ${target.toUpperCase()}. (Enter to ${
           challenge ? "play a random game" : "play again"
         })`;
 
@@ -222,12 +222,11 @@ function Game(props: GameProps) {
       }
       if ((e.ctrlKey || e.metaKey) && e.key === "d") {
         // setDevmode(prevDevmode => !prevDevmode); // to depend on previous value, must use a fxn
+        e.preventDefault();
         setDevmode(prevDevmode => {
           console.log(`Toggling devmode: ${!prevDevmode}`);
           return !prevDevmode
         }); 
-        
-        e.preventDefault();
       }
     };
     document.addEventListener("keydown", onKeyDown);
