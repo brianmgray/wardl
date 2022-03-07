@@ -8,7 +8,7 @@
   - [x] Build algorithm for this, see [this question](https://stackoverflow.com/questions/2205540/algorithm-to-transform-one-word-to-another-through-valid-words)
   - [x] Move repo
   - [x] UI improvements to improve the target display and remove the devmode setting
-  - [ ] Start on today, change random approach
+  - [x] Start on today, change random approach
 - [ ] Pipeline/promote
 - [ ] Features
   - [ ] Improve social sharing links

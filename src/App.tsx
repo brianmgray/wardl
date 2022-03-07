@@ -1,6 +1,5 @@
 import "./App.css";
-import { seed, urlParam } from "./util";
-import { MAX_GUESSES } from "./constants";
+import { Constants } from "./constants";
 import Game from "./Game";
 import { useEffect, useState } from "react";
 import { About } from "./About";
@@ -27,8 +26,6 @@ function useSetting<T>(
   return [current, setSetting];
 }
 
-const todaySeed = new Date().toISOString().replace(/-/g, "").slice(0, 8);
-
 function App() {
   type Page = "game" | "about" | "settings";
   const [page, setPage] = useState<Page>("game");
@@ -46,15 +43,11 @@ function App() {
 
   useEffect(() => {
     document.body.className = dark ? "dark" : "";
-    if (urlParam("today") !== null || urlParam("todas") !== null) {
-      document.location = "?seed=" + todaySeed;
-    }
     setTimeout(() => {
       // Avoid transition on page load
       document.body.style.transition = "0.3s background-color ease-out";
     }, 1);
   }, [dark]);
-
   const link = (emoji: string, label: string, page: Page) => (
     <button
       className="emoji-link"
@@ -87,18 +80,6 @@ function App() {
             {link("⚙️", "Settings", "settings")}
           </>
         )}
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          left: 5,
-          top: 5,
-          visibility: page === "game" ? "visible" : "hidden",
-        }}
-      >
-        <a href={seed ? "?random" : "?seed=" + todaySeed}>
-          {seed ? "Random" : "Today's"}
-        </a>
       </div>
       {page === "about" && <About />}
       {page === "settings" && (
@@ -177,7 +158,7 @@ function App() {
         </div>
       )}
       <Game
-        maxGuesses={MAX_GUESSES}
+        maxGuesses={Constants.MAX_GUESSES}
         hidden={page !== "game"}
         difficulty={difficulty}
         colorBlind={colorBlind}

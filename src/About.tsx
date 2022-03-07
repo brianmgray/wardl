@@ -1,6 +1,6 @@
 import { Clue } from "./clue";
 import { Row, RowState } from "./Row";
-import { MAX_GUESSES } from "./constants";
+import { Constants } from "./constants";
 
 export function About() {
   return (
@@ -15,7 +15,7 @@ export function About() {
       </p>
       <h2>Review</h2>
       <p>
-        You get {MAX_GUESSES} tries to guess a target word.
+        You get {Constants.MAX_GUESSES} tries to guess a target word.
       </p>
       <p>
         Each guess must be a valid five-letter word. After each guess, the tiles 

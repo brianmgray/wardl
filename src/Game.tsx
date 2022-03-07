@@ -6,18 +6,16 @@ import { Keyboard } from "./Keyboard";
 import {
   Difficulty, 
   describeSeed,
-  dictionarySet,
   speak,
-  seed,
-  urlParam,
   conditionalDebug
 } from "./util";
 import { Constants } from './constants'
-import { decode, encode } from "./base64";
 import TargetIndex from './targetIndex'
 import targets from "./data/targets.json";
 
-const targetIndex = new TargetIndex(targets, seed);
+
+const todaySeed:string = new Date().toISOString().replace(/-/g, "").slice(0, 8);
+const targetIndex = new TargetIndex(targets, todaySeed);
 
 enum GameState {
   Playing,
@@ -33,51 +31,13 @@ interface GameProps {
   keyboardLayout: string;
 }
 
-function getChallengeUrl(target: string): string {
-  return (
-    window.location.origin +
-    window.location.pathname +
-    "?challenge=" +
-    encode(target)
-  );
-}
-
-let initChallenge = "";
-let challengeError = false;
-try {
-  initChallenge = decode(urlParam("challenge") ?? "").toLowerCase();
-} catch (e) {
-  console.warn(e);
-  challengeError = true;
-}
-if (initChallenge && !dictionarySet.has(initChallenge)) {
-  initChallenge = "";
-  challengeError = true;
-}
-
-function parseUrlLength(): number {
-  const lengthParam = urlParam("length");
-  if (!lengthParam) return 5;
-  const length = Number(lengthParam);
-  return length >= Constants.WORD_LENGTH_MIN && length <= Constants.WORD_LENGTH_MAX ? length : 5;
-}
-
-function parseUrlGameNumber(): number {
-  const gameParam = urlParam("game");
-  if (!gameParam) return 1;
-  const gameNumber = Number(gameParam);
-  return gameNumber >= 1 && gameNumber <= 1000 ? gameNumber : 1;
-}
-
 function Game(props: GameProps) {
   const [gameState, setGameState] = useState(GameState.Playing);
   const [guesses, setGuesses] = useState<string[]>([]);
   const [currentGuess, setCurrentGuess] = useState<string>("");
-  const [challenge, setChallenge] = useState<string>(initChallenge);
-  const [wordLength, setWordLength] = useState(
-    challenge ? challenge.length : parseUrlLength()
-  );
-  const [gameNumber, setGameNumber] = useState(parseUrlGameNumber());
+  const [challenge, setChallenge] = useState<string>("");
+  const [wordLength, setWordLength] = useState<number>(Constants.WORD_LENGTH)
+  const [gameNumber, setGameNumber] = useState(1);
   const [devmode, setDevmode] = useState<boolean>(false);
   const [targetHistory, setTargetHistory] = useState<string[]>([]);
   const [target, setTarget] = useState(() => {
@@ -87,30 +47,14 @@ function Game(props: GameProps) {
     conditionalDebug(`\t changing target 1: ${newTarget}`);
     return newTarget;
   });
-  const [hint, setHint] = useState<string>(
-    challengeError
-      ? `Invalid challenge string, playing random game.`
-      : `Make your first guess!`
-  );
-  const currentSeedParams = () =>
-    `?seed=${seed}&length=${wordLength}&game=${gameNumber}`;
-  useEffect(() => {
-    if (seed) {
-      window.history.replaceState(
-        {},
-        document.title,
-        window.location.pathname + currentSeedParams()
-      );
-    }
-  }, [wordLength, gameNumber]);
+  const [hint, setHint] = useState<string>(`Make your first guess!`);
   const tableRef = useRef<HTMLTableElement>(null);
   const startNextGame = () => {
     if (challenge) {
       // Clear the URL parameters:
       window.history.replaceState({}, document.title, window.location.pathname);
     }
-    const newWordLength =
-    wordLength >= Constants.WORD_LENGTH_MIN && wordLength <= Constants.WORD_LENGTH_MAX ? wordLength : 5;
+    const newWordLength = Constants.WORD_LENGTH;
     const newTarget = targetIndex.pickStartingTarget();
     setChallenge("");
     setWordLength(newWordLength);
@@ -122,13 +66,11 @@ function Game(props: GameProps) {
     setGuesses([]);
     setCurrentGuess("");
     setGameState(GameState.Playing);
-    setGameNumber((x) => x + 1);
+    setGameNumber((gNumber) => gNumber + 1);
   };
 
   async function share(copiedHint: string, text?: string) {
-    const url = seed
-      ? window.location.origin + window.location.pathname + currentSeedParams()
-      : getChallengeUrl(target);
+    const url = Constants.WARDLE_URL;
     const body = url + (text ? "\n\n" + text : "");
     if (
       /android|iphone|ipad|ipod|webos/i.test(navigator.userAgent) &&
@@ -303,42 +245,32 @@ function Game(props: GameProps) {
         onKey={onKey}
       />
       <div className="Game-seed-info">
-        {challenge
-          ? "playing a challenge game"
-          : seed
-          ? `${describeSeed(seed)} — length ${wordLength}, game ${gameNumber}`
-          : "playing a random game"}
+        {`${describeSeed(todaySeed)} ${gameNumber > 1 ? " - Game " + gameNumber : ""}`}
       </div>
-      <p>
-        <button
-          onClick={() => {
-            share("Link copied to clipboard!");
-          }}
-        >
-          Share a link to this game
-        </button>{" "}
+      <div className="Game-share">
         {gameState !== GameState.Playing && (
           <button
-            onClick={() => {
-              const emoji = props.colorBlind
+          onClick={() => {
+            const emoji = props.colorBlind
                 ? ["⬛", "🟦", "🟧"]
                 : ["⬛", "🟨", "🟩"];
               share(
                 "Result copied to clipboard!",
                 guesses
-                  .map((guess) =>
-                    clue(guess, target)
-                      .map((c) => emoji[c.clue ?? 0])
-                      .join("")
-                  )
-                  .join("\n")
-              );
-            }}
-          >
-            Share emoji results
+                .map((guess) =>
+                clue(guess, target)
+                .map((c) => emoji[c.clue ?? 0])
+                .join("")
+                )
+                .join("\n")
+                );
+              }}
+              >
+            Share 
+            <svg fill="#000000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30px" height="30px"><path d="M 23 3 A 4 4 0 0 0 19 7 A 4 4 0 0 0 19.09375 7.8359375 L 10.011719 12.376953 A 4 4 0 0 0 7 11 A 4 4 0 0 0 3 15 A 4 4 0 0 0 7 19 A 4 4 0 0 0 10.013672 17.625 L 19.089844 22.164062 A 4 4 0 0 0 19 23 A 4 4 0 0 0 23 27 A 4 4 0 0 0 27 23 A 4 4 0 0 0 23 19 A 4 4 0 0 0 19.986328 20.375 L 10.910156 15.835938 A 4 4 0 0 0 11 15 A 4 4 0 0 0 10.90625 14.166016 L 19.988281 9.625 A 4 4 0 0 0 23 11 A 4 4 0 0 0 27 7 A 4 4 0 0 0 23 3 z"/></svg>
           </button>
         )}
-      </p>
+      </div>
     </div>
   );
 }

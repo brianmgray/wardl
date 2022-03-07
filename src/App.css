@@ -219,6 +219,24 @@ a:active {
   font-variant-numeric: tabular-nums;
 }
 
+.Game-share {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Game-share button {
+  gap: 5px;
+  display: flex;
+  font-size: 20px;
+  padding: .4em;
+  margin-top: 1em;
+}
+
+.Game-share svg {
+  height: 20px;
+}
+
 .Game-sr-feedback,
 .sr-only {
   position: absolute;

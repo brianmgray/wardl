@@ -19,7 +19,7 @@ class TargetIndex {
    * @param targets potential targets
    * @param seed random seed
    */
-  constructor(targets: string[], seed:number) {
+  constructor(targets: string[], seed:string) {
     this.#rng = new Prando(seed); // if seed is undefined, this will be unseeded (random games)
     this.#index = PassjoinIndex.from(targets, levenshteinLte1, 1);
   }

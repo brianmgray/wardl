@@ -1,5 +1,5 @@
 import dictionary from "./data/dictionary.json";
-import constants from "./data/constants.json"
+import { Constants } from "./constants"
 
 export enum Difficulty {
   Normal,
@@ -7,12 +7,7 @@ export enum Difficulty {
   UltraHard,
 }
 
-export const seed = Number(urlParam("seed"));
 export const dictionarySet: Set<string> = new Set(dictionary);
-
-export function urlParam(name: string): string | null {
-  return new URLSearchParams(window.location.search).get(name);
-}
 
 // https://a11y-guidelines.orange.com/en/web/components-examples/make-a-screen-reader-talk/
 export function speak(
@@ -42,7 +37,8 @@ export function ordinal(n: number): string {
 export const englishNumbers =
   "zero one two three four five six seven eight nine ten eleven".split(" ");
 
-export function describeSeed(seed: number): string {
+export function describeSeed(origSeed: string): string {
+  const seed : number = Number(origSeed);
   const year = Math.floor(seed / 10000);
   const month = Math.floor(seed / 100) % 100;
   const day = seed % 100;
@@ -68,7 +64,7 @@ export function describeSeed(seed: number): string {
 }
 
 export function conditionalDebug(log:string): void {
-  if (constants.ENABLE_DEBUG_TARGETS) {
+  if (Constants.ENABLE_DEBUG_TARGETS) {
     console.log(log);
   }
 }
