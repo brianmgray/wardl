@@ -10,7 +10,7 @@
   - [x] UI improvements to improve the target display and remove the devmode setting
   - [x] Start on today, change random approach
   - [ ] Update targets, exclude those without a PassjoinIndex tree
-- [ ] Pipeline/promote
+- [x] Pipeline/promote
 - [ ] Features
   - [ ] Improve social sharing links
   - [ ] Update modes - easy mode (highlight changed letter), ultra hard (maybe get rid of this)
