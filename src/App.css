@@ -148,6 +148,10 @@ table.Game-rows > tbody {
   color: white !important;
 }
 
+.letter-changed {
+  border: 2px solid red;
+}
+
 body.dark {
   background-color: #404040;
   color: #e0e0e0;
@@ -191,6 +195,7 @@ a:active {
 .App-about {
   margin-top: -1rem;
   line-height: 1.4;
+  text-align: left;
 }
 
 .App-about b {

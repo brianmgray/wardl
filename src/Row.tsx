@@ -48,7 +48,7 @@ export function Row(props: RowProps) {
     <tr className={rowClass}>
       {letterDivs}
       {props.annotation && (
-        <span className="Row-annotation">{props.annotation}</span>
+        <td className="Row-annotation">{props.annotation}</td>
       )}
       {props.showTargets && (
         <td className="Row-target">{props.target}</td>
