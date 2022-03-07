@@ -16,9 +16,30 @@ from online.
 
 ## For developers
 
-To run the code locally, first install [Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm). Then, in this directory, open a terminal and run `npm install` followed by `npm run start`. _wardl_ will be running at http://localhost:3000/. Any changes you make to the source code will be reflected there. Have fun!
+### Run locally
 
-Finally, `npm run deploy` will deploy your code to the `gh-pages` branch of your fork, so that everyone can play your version at https://yourname.github.io/wardl (or the name of your fork if you renamed it).
+To run the code locally,
+
+1. install [Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm.
+2. In this directory, run `npm install` followed by `npx netlify dev`. _wardl_ will be running at http://localhost:8888. Any changes you make to the source code will be reflected there. 
+3. Have fun!
+
+Share local build over the internet: ``netlify dev --live``
+
+### Update lists
+
+There are scripts to update the lists.
+
+1. To update possible targets, run ``npm run reduceTargets``
+2. To reduce the dictionary, run ``npm run reduceDictionary``
+
+### Deploy
+
+To deploy using netlify:
+````
+> npx netlify login #only needed once
+
+````
 
 See [backlog](backlog.md)
 

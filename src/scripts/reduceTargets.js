@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 const fs = require('fs')
-const targets = require("./../lists/targets.original.json")
+const targets = require("./../data/targets.original.json")
 
 // script constants
-const DIR_OUTPUT = './../lists'
+const DIR_OUTPUT = './../data'
 const FILE_OUTPUT = DIR_OUTPUT + "/targets.json";
 const MAX_RARITY_WORD = "murky";
 const WORD_LENGTH = 5;

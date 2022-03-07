@@ -9,6 +9,7 @@
   - [x] Move repo
   - [x] UI improvements to improve the target display and remove the devmode setting
   - [x] Start on today, change random approach
+  - [ ] Update targets, exclude those without a PassjoinIndex tree
 - [ ] Pipeline/promote
 - [ ] Features
   - [ ] Improve social sharing links

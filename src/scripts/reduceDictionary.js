@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 const fs = require('fs')
-const targets = require("../lists/dictionary.original.json")
+const targets = require("../data/dictionary.original.json")
 
 // script constants
-const DIR_OUTPUT = './../lists'
+const DIR_OUTPUT = './../data'
 const FILE_OUTPUT = DIR_OUTPUT + "/dictionary.json";
 const WORD_LENGTH = 5;
 
