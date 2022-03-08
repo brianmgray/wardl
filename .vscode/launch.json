@@ -26,9 +26,6 @@
             "<node_internals>/**"
         ],
         "program": "reduceTargets.js",
-        "outFiles": [
-            "${workspaceFolder}/**/*.js"
-        ],
         "cwd": "${workspaceFolder}/src/scripts/"
     },
     {
