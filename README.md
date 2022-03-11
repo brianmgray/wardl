@@ -22,7 +22,7 @@ from online.
 
 To run the code locally,
 
-1. install [Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm.
+1. install [Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm).
 2. In this directory, run `npm install` followed by `npx netlify dev`. _wardl_ will be running at http://localhost:8888. Any changes you make to the source code will be reflected there. 
 3. Have fun!
 
