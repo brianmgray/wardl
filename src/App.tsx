@@ -37,9 +37,9 @@ function App() {
   const [difficulty, setDifficulty] = useSetting<number>("difficulty", 0);
   const [keyboard, setKeyboard] = useSetting<string>(
     "keyboard",
-    "qwertyuiop-asdfghjkl-BzxcvbnmE"
+    "qwertyuiop-asdfghjkl-EzxcvbnmB"
   );
-  const [enterLeft, setEnterLeft] = useSetting<boolean>("enter-left", false);
+  const [enterRight, setEnterRight] = useSetting<boolean>("enter-right", false);
 
   useEffect(() => {
     document.body.className = dark ? "dark" : "";
@@ -148,12 +148,12 @@ function App() {
             </select>
             <input
               style={{ marginLeft: 20 }}
-              id="enter-left-setting"
+              id="enter-right-setting"
               type="checkbox"
-              checked={enterLeft}
-              onChange={() => setEnterLeft((x: boolean) => !x)}
+              checked={enterRight}
+              onChange={() => setEnterRight((x: boolean) => !x)}
             />
-            <label htmlFor="enter-left-setting">"Enter" on left side</label>
+            <label htmlFor="enter-right-setting">"Enter" on right side</label>
           </div>
         </div>
       )}
@@ -163,8 +163,8 @@ function App() {
         difficulty={difficulty}
         colorBlind={colorBlind}
         keyboardLayout={keyboard.replaceAll(
-          /[BE]/g,
-          (x) => (enterLeft ? "EB" : "BE")["BE".indexOf(x)]
+          /[EB]/g,
+          (x) => (enterRight ? "BE" : "EB")["EB".indexOf(x)]
         )}
       />
     </div>
