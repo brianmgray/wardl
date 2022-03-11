@@ -37,13 +37,7 @@ There are scripts to update the lists.
 
 ### Deploy
 
-To deploy using netlify:
-````
-> npx netlify login #only needed once
-
-````
-
-See [backlog](backlog.md)
+Any commit to the main will trigger a deploy using netlify.
 
 ## License
 
