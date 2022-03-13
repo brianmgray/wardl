@@ -37,6 +37,19 @@ There are scripts to update the lists.
 
 Any commit to the main will trigger a deploy using netlify.
 
+### Update dependencies
+
+From [Updating npm dependencies](https://www.carlrippon.com/upgrading-npm-dependencies/):
+
+1. Run ``npm outdated``
+2. If that all looks good, run ``npm update``
+
+To fix vulnerabilits (on the command line or in github):
+
+1. Run ``npm audit --production`` to build the full audit report
+2. Run ``npm audit fix --production`` to fix any that can be fixed without breaking changes
+3. If needed, run ``npm audit fix --force --production`` to fix all, even if they will make breaking changes
+
 ## License
 
 View license at the link below!
