@@ -13,6 +13,7 @@ import {conditionalDebug} from './util';
 class TargetIndex {
   #index: PassjoinIndex<string>;
   #rng : Prando;
+  #seed : string;
 
   /**
    * Build the index from targets
@@ -20,8 +21,17 @@ class TargetIndex {
    * @param seed random seed
    */
   constructor(targets: string[], seed:string) {
+    this.#seed = seed;
     this.#rng = new Prando(seed); // if seed is undefined, this will be unseeded (random games)
     this.#index = PassjoinIndex.from(targets, levenshteinLte1, 1);
+  }
+
+  /**
+   * Reset the RNG for the current game number
+   * @param game number for the new game
+   */
+  reset(game:number = 0) {
+    this.#rng = new Prando(`${this.#seed}-${game}`);
   }
 
   /**

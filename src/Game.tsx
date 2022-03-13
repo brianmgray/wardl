@@ -54,6 +54,7 @@ function Game(props: GameProps) {
       // Clear the URL parameters:
       window.history.replaceState({}, document.title, window.location.pathname);
     }
+    targetIndex.reset(gameNumber + 1);
     const newWordLength = Constants.WORD_LENGTH;
     const newTarget = targetIndex.pickStartingTarget();
     setChallenge("");
