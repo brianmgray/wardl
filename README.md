@@ -2,12 +2,10 @@
 
 ## Play at [wardl.co](http://wardl.co)
 
-wardl is [Wordl](https://www.nytimes.com/games/wordle/index.html) but with these important tweaks:
-TODO document wardl rules.
+wardl is [Wordle](https://www.nytimes.com/games/wordle/index.html) but the target word changes by one letter everytime you guess wrong.
 
 Originally a fork of the incredibly helpful [hello-wordl](https://github.com/lynn/hello-wordl), 
-provided via an ([MIT License](https://github.com/lynn/hello-wordl/blob/main/LICENSE)). This project changed the 
-game significantly enough that I can't make PRs, so I made a separate repo.
+provided via an ([MIT License](https://github.com/lynn/hello-wordl/blob/main/LICENSE)). This project changed the game significantly enough that I can't make PRs, so I made a separate repo.
 
 ## Word Lists
 

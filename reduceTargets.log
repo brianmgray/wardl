@@ -1,7 +1,0 @@
-
-> wordl@0.1.0 reduceTargets
-> netlify dev:exec node src/scripts/reduceTargets
-
-◈ Ignored general context env var: LANG (defined in process)
-Running reduceTargets
-Found 37947 potential targets

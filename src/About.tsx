@@ -11,9 +11,8 @@ export function About() {
           <i>Wordle</i>
         </a>{" "}
         by <a href="https://twitter.com/powerlanguish">powerlanguage</a>.
-        First let's review Wordl.
       </p>
-      <h2>Review</h2>
+      <h2>Wordle Review</h2>
       <p>
         You get {Constants.MAX_GUESSES} tries to guess a target word.
       </p>
