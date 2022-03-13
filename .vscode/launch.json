@@ -8,7 +8,7 @@
         "type": "firefox",
         "request": "launch",
         "name": "Launch Firefox against localhost",
-        "url": "http://localhost:4200",
+        "url": "http://localhost:8888",
         "webRoot": "${workspaceFolder}",
         "enableCRAWorkaround": true,
         "reAttach": true,

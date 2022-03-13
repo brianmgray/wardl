@@ -56,6 +56,9 @@ class TargetIndex {
     if (possible.length > targetHistory.length) {
       // if we have multiple to choose from, remove any we have already used
       possible = possible.filter(t => !targetHistory.includes(t));
+    } else if (possible.some(x => x !== current)) {
+      // if at least one value is not the current item, filter it out
+      possible = possible.filter(t => t !== current);
     }
     conditionalDebug(`TargetIndex.advance | possible | ${possible}`)
     let next = this.#rng.nextArrayItem(possible);
