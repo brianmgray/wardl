@@ -26,6 +26,10 @@ To run the code locally,
 
 Share local build over the internet: ``netlify dev --live``
 
+### Run Tests
+
+Tests are written in Jest. Run with ``npm run test``
+
 ### Update lists
 
 There are scripts to update the lists.

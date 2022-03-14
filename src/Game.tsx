@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Row, RowState } from "./Row";
 import dictionary from "./data/dictionary.json";
-import { Clue, clue, describeClue, violation } from "./clue";
+import { Clue, CluedLetter, clue, describeClue, violation } from "./clue";
 import { Keyboard } from "./Keyboard";
 import {
   Difficulty, 
   describeSeed,
   speak,
+  findChangedLetterIndex,
   conditionalDebug
 } from "./util";
 import { Constants } from './constants'
@@ -120,14 +121,14 @@ function Game(props: GameProps) {
         setHint("Not a valid word");
         return;
       }
-      for (const g of guesses) {
-        const c = clue(g, target);
+      guesses.forEach((g, i) => {
+        const c = clue(g, target); 
         const feedback = violation(props.difficulty, c, currentGuess);
         if (feedback) {
           setHint(feedback);
           return;
         }
-      }
+      });
       setGuesses((guesses) => guesses.concat([currentGuess]));
       setCurrentGuess((guess) => "");
 
@@ -177,7 +178,9 @@ function Game(props: GameProps) {
     .fill(undefined)
     .map((_, i) => {
       const guess = [...guesses, currentGuess][i] ?? "";
-      const cluedLetters = clue(guess, target);
+      const prevTarget = i > 1 ? targetHistory[i-1] : "";
+      const guessTarget:string = targetHistory[i];
+      const cluedLetters = clue(guess, target, guessTarget, prevTarget);
       const lockedIn = i < guesses.length;
       if (lockedIn) {
         for (const { clue, letter } of cluedLetters) {
@@ -255,16 +258,14 @@ function Game(props: GameProps) {
             const emoji = props.colorBlind
                 ? ["⬛", "🟦", "🟧"]
                 : ["⬛", "🟨", "🟩"];
-              share(
-                "Result copied to clipboard!",
+                //TODO BG
+              share("Result copied to clipboard!",
                 guesses
-                .map((guess) =>
-                clue(guess, target)
-                .map((c) => emoji[c.clue ?? 0])
-                .join("")
+                  .map((guess, i) => clue(guess, target, i > 1 ? targetHistory[i-1] : "", targetHistory[i])
+                  .map((c) => emoji[c.clue ?? 0])
+                  .join("")
                 )
-                .join("\n")
-                );
+                .join("\n"));
               }}
               >
             Share 
