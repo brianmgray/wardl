@@ -21,10 +21,10 @@ export function Row(props: RowProps) {
   const letterDivs = props.cluedLetters
     .concat(Array(props.wordLength).fill({ clue: Clue.Absent, letter: "" }))
     .slice(0, props.wordLength)
-    .map(({ clue, guessClue, letter }, i) => {
+    .map(({ clue, letter }, i) => {
       let letterClass = "Row-letter";
       if (isLockedIn && clue !== undefined) {
-        letterClass += " " + clueClass(clue, guessClue);
+        letterClass += " " + clueClass(clue);
       }
       return (
         <td

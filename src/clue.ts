@@ -1,4 +1,4 @@
-import { englishNumbers, findChangedLetterIndex, ordinal } from "./util";
+import { englishNumbers, ordinal } from "./util";
 import { Difficulty } from './util'
 
 export enum Clue {
@@ -8,26 +8,11 @@ export enum Clue {
 }
 
 export interface CluedLetter {
+  clue?: Clue;
   letter: string;
-  clue?: Clue;            // compared to current target
-  guessClue?: Clue;       // compared to target at the time of the guess
-  changed?: boolean;      // true if the letter changed for this round
 }
 
-/**
- * Populate CluedLetters for a given guess
- * @param word the guess
- * @param target the target
- * @param guessTarget the target for this guess
- * @param prevTarget the previous target (or empty string)
- * @returns array of CluedLetters
- */
-export function clue(word: string, target: string, guessTarget:string = "", prevTarget:string = ""): CluedLetter[] {
-  let changedIdx: number = findChangedLetterIndex(prevTarget, guessTarget);
-  let guessClue:CluedLetter[] = []
-  if (guessTarget.length > 0) {
-    guessClue = clue(word, guessTarget);
-  } 
+export function clue(word: string, target: string): CluedLetter[] {
   let elusive: string[] = [];
   target.split("").forEach((letter, i) => {
     if (word[i] !== letter) {
@@ -36,51 +21,26 @@ export function clue(word: string, target: string, guessTarget:string = "", prev
   });
   return word.split("").map((letter, i) => {
     let j: number;
-    let changed: boolean = changedIdx === i;
-    let answer = { letter, clue: Clue.Absent, changed: changed, 
-      guessClue: guessClue.length > i ? guessClue[i].clue : Clue.Absent
-    };
     if (target[i] === letter) {
-      answer.clue = Clue.Correct;
-      // return { clue: Clue.Correct, letter, changed: changed };
+      return { clue: Clue.Correct, letter };
     } else if ((j = elusive.indexOf(letter)) > -1) {
       // "use it up" so we don't clue at it twice
       elusive[j] = "";
-      answer.clue = Clue.Elsewhere;
-      // return { clue: Clue.Elsewhere, letter, changed: changed };
+      return { clue: Clue.Elsewhere, letter };
     } else {
-      answer.clue = Clue.Absent;
-      // return { clue: Clue.Absent, letter, changed: changed };
+      return { clue: Clue.Absent, letter };
     }
-    return answer;
   });
 }
 
-export function clueClass(clue: Clue, guessClue: Clue = Clue.Absent): string {
-  let clazz = "";
-  switch (clue) {
-    case Clue.Absent:
-      clazz = "letter-absent";
-      break;
-    case Clue.Elsewhere:
-      clazz = "letter-elsewhere";
-      break;
-    case Clue.Correct:
-      clazz = "letter-correct";
-      break;
+export function clueClass(clue: Clue): string {
+  if (clue === Clue.Absent) {
+    return "letter-absent";
+  } else if (clue === Clue.Elsewhere) {
+    return "letter-elsewhere";
+  } else {
+    return "letter-correct";
   }
-  switch (guessClue) {
-    case Clue.Absent:
-      clazz += " guess-absent";
-      break;
-    case Clue.Elsewhere:
-      clazz += " guess-elsewhere";
-      break;
-    case Clue.Correct:
-      clazz += " guess-correct";
-      break;
-  }
-  return clazz;
 }
 
 export function clueWord(clue: Clue): string {

@@ -63,26 +63,6 @@ export function describeSeed(origSeed: string): string {
   }
 }
 
-/**
- * Find the index of the letter that changed between the first and second targets
- * @param target1 
- * @param target2 
- * @returns the index of the changed letter or -1 if they are identical
- */
-export function findChangedLetterIndex(target1:any, target2:string):number {
-  if (target1.length === 0 || target2.length === 0)
-    return -1;
-  let letters1 = target1.split("");
-  let letters2 = target2.split("");
-  // reduce the array to the index of the changed letter
-  // NOTE: cannot use a simple array diff here because of double letters. We need
-  // to find the change at the specific index it happens
-  let diffIdx = letters2.findIndex((letter, index) => {
-    return letter !== letters1[index];
-  });
-  return diffIdx;
-}
-
 export function conditionalDebug(log:string): void {
   if (Constants.ENABLE_DEBUG_TARGETS) {
     console.log(log);

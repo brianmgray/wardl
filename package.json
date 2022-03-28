@@ -1,6 +1,6 @@
 {
   "name": "wardl",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "homepage": "http://wardl.co",
   "private": false,
   "dependencies": {
