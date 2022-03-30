@@ -198,9 +198,9 @@ function Game(props: GameProps) {
           rowState={
             lockedIn
               ? RowState.LockedIn
-              : i === guesses.length
-              ? RowState.Editing
-              : RowState.Pending
+                : i === guesses.length
+                  ? RowState.Editing
+                  : RowState.Pending
           }
           cluedLetters={cluedLetters}
           target={targetHistory[i]}
