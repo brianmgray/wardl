@@ -152,6 +152,14 @@ table.Game-rows > tbody {
   border: 2px solid red;
 }
 
+.guess-correct {
+  border: 3px dashed rgb(87, 172, 120);
+}
+
+.guess-elsewhere {
+  border: 3px dashed #e9c601;
+}
+
 body.dark {
   background-color: #404040;
   color: #e0e0e0;
