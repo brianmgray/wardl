@@ -43,15 +43,16 @@ export function About() {
         </tbody>
       </table>
       <ul>
-        <li><b>P</b>, <b>C</b> and <b>K</b> aren't in the target word at all.</li>
+        <li><b className={"letter-absent"}>P</b>, <b className={"letter-absent"}>C</b> and&nbsp;
+            <b className={"letter-absent"}>K</b> aren't in the target word at all.</li>
         <li>
-          <b className={"green-bg"}>S</b> is correct! The first letter is{" "}
-          <b className={"green-bg"}>S</b>
+          <b className={"letter-correct"}>S</b> is correct! The first letter is{" "}
+          <b className={"letter-correct"}>S</b>
           .<br />
           (There could also be a second S in the word.)
         </li>
         <li>
-          <b className={"yellow-bg"}>E</b> occurs <em>elsewhere</em> in the target word.<br />
+          <b className={"letter-elsewhere"}>E</b> occurs <em>elsewhere</em> in the target word.<br />
           (Perhaps more than once 🤔)
         </li>
       </ul> 
@@ -111,8 +112,8 @@ export function About() {
       </p>
       <p>
         The clues always relate to the current target. For example, when the target changed from 
-        "shale" to "whale", the <b className={"green-bg"}>S</b> became an&nbsp;
-        <b className={"guess-correct"}>S</b> because "S" was no longer in the correct place. It has 
+        "shale" to "whale", the <b className={"letter-correct"}>S</b> became an&nbsp;
+        <b className={"letter-absent guess-correct"}>S</b> because "S" was no longer in the correct place. It has 
         a green border to remind you that it was correct for this row's target word.
       </p>
       <hr />

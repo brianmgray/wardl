@@ -144,7 +144,7 @@ table.Game-rows > tbody {
 
 .letter-absent {
   border: 2px solid transparent;
-  background-color: rgb(162, 162, 162);
+  background-color: #757575; 
   color: white !important;
 }
 
@@ -153,11 +153,11 @@ table.Game-rows > tbody {
 }
 
 .guess-correct {
-  border: 3px dashed rgb(87, 172, 120);
+  border: 3px solid rgb(87, 172, 120);
 }
 
 .guess-elsewhere {
-  border: 3px dashed #e9c601;
+  border: 3px solid #e9c601;
 }
 
 body.dark {
@@ -204,21 +204,6 @@ a:active {
   margin-top: -1rem;
   line-height: 1.4;
   text-align: left;
-}
-
-.App-about b {
-  background-color: #888;
-  color: white;
-  padding: 1px 3px;
-  border-radius: 2px;
-}
-
-.App-about b.green-bg {
-  background-color: rgb(87, 172, 120);
-}
-
-.App-about b.yellow-bg {
-  background-color: #e9c601;
 }
 
 .Game-seed-info {
@@ -304,8 +289,15 @@ a:active {
 .App-container.color-blind .App-about b.green-bg {
   background-color: #f5793a;
 }
+.App-container.color-blind .guess-correct {
+  border: 3px solid #f5793a;
+}
 
 .App-container.color-blind .letter-elsewhere,
 .App-container.color-blind .App-about b.yellow-bg {
   background-color: #85c0f9;
 }
+.App-container.color-blind .guess-elsewhere {
+  border: 3px solid #85c0f9;
+}
+
