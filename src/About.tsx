@@ -31,32 +31,30 @@ export function About() {
           rowState={RowState.LockedIn}
           wordLength={5}
           cluedLetters={[
-            { clue: Clue.Correct, letter: "s" },
-            { clue: Clue.Absent, letter: "p" },
+            { clue: Clue.Correct,   letter: "s" },
+            { clue: Clue.Absent,    letter: "p" },
             { clue: Clue.Elsewhere, letter: "e" },
-            { clue: Clue.Absent, letter: "c" },
-            { clue: Clue.Absent, letter: "k" },
+            { clue: Clue.Absent,    letter: "c" },
+            { clue: Clue.Absent,    letter: "k" },
           ]}
           showTargets={true}
           target=""
         />
         </tbody>
       </table>
-      <p>
-        <ul>
-          <li><b>P</b>, <b>C</b> and <b>K</b> aren't in the target word at all.</li>
-          <li>
-            <b className={"green-bg"}>S</b> is correct! The first letter is{" "}
-            <b className={"green-bg"}>S</b>
-            .<br />
-            (There could also be a second S in the word.)
-          </li>
-          <li>
-            <b className={"yellow-bg"}>E</b> occurs <em>elsewhere</em> in the target word.<br />
-            (Perhaps more than once 🤔)
-          </li>
-        </ul> 
-      </p>
+      <ul>
+        <li><b>P</b>, <b>C</b> and <b>K</b> aren't in the target word at all.</li>
+        <li>
+          <b className={"green-bg"}>S</b> is correct! The first letter is{" "}
+          <b className={"green-bg"}>S</b>
+          .<br />
+          (There could also be a second S in the word.)
+        </li>
+        <li>
+          <b className={"yellow-bg"}>E</b> occurs <em>elsewhere</em> in the target word.<br />
+          (Perhaps more than once 🤔)
+        </li>
+      </ul> 
       <hr />
       <h2>Wardl</h2>
       <p>
@@ -71,11 +69,11 @@ export function About() {
           rowState={RowState.LockedIn}
           wordLength={5}
           cluedLetters={[
-            { clue: Clue.Absent, letter: "s" },
-            { clue: Clue.Absent, letter: "p" },
+            { clue: Clue.Absent,    letter: "s",  guessClue: Clue.Correct },
+            { clue: Clue.Absent,    letter: "p" },
             { clue: Clue.Elsewhere, letter: "e" },
-            { clue: Clue.Absent, letter: "c" },
-            { clue: Clue.Absent, letter: "k" },
+            { clue: Clue.Absent,    letter: "c" },
+            { clue: Clue.Absent,    letter: "k" },
           ]}
           showTargets={true}
           target={'shall'}
@@ -86,7 +84,7 @@ export function About() {
           cluedLetters={[
             { clue: Clue.Absent, letter: "s" },
             { clue: Clue.Correct, letter: "h" },
-            { clue: Clue.Absent, letter: "e" },
+            { clue: Clue.Elsewhere, letter: "e" },
             { clue: Clue.Correct, letter: "l" },
             { clue: Clue.Absent, letter: "l" },
           ]}
@@ -113,8 +111,9 @@ export function About() {
       </p>
       <p>
         The clues always relate to the current target. For example, when the target changed from 
-        "shale" to "whale", the <b className={"green-bg"}>S</b> became an <b>S</b> because "S" was 
-        no longer in the correct place. 
+        "shale" to "whale", the <b className={"green-bg"}>S</b> became an&nbsp;
+        <b className={"guess-correct"}>S</b> because "S" was no longer in the correct place. It has 
+        a green border to remind you that it was correct for this row's target word.
       </p>
       <hr />
       <p>
