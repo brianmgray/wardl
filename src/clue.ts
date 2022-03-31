@@ -56,31 +56,16 @@ export function clue(word: string, target: string, guessTarget:string = "", prev
   });
 }
 
-export function clueClass(clue: Clue, guessClue: Clue = Clue.Absent): string {
-  let clazz = "";
-  switch (clue) {
-    case Clue.Absent:
-      clazz = "letter-absent";
-      break;
-    case Clue.Elsewhere:
-      clazz = "letter-elsewhere";
-      break;
-    case Clue.Correct:
-      clazz = "letter-correct";
-      break;
+export function clueClass(clue: Clue, guess:boolean = false): string {
+  let prefix:string = guess ? "guess" : "letter";
+  if (clue === Clue.Absent) {
+    return `${prefix}-absent`;
+  } else if (clue === Clue.Elsewhere) {
+    return `${prefix}-elsewhere`;
+  } else if (clue === Clue.Correct) {
+    return `${prefix}-correct`;
   }
-  switch (guessClue) {
-    case Clue.Absent:
-      clazz += " guess-absent";
-      break;
-    case Clue.Elsewhere:
-      clazz += " guess-elsewhere";
-      break;
-    case Clue.Correct:
-      clazz += " guess-correct";
-      break;
-  }
-  return clazz;
+  return "";
 }
 
 export function clueWord(clue: Clue): string {

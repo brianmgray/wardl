@@ -24,7 +24,8 @@ export function Row(props: RowProps) {
     .map(({ clue, guessClue, letter }, i) => {
       let letterClass = "Row-letter";
       if (isLockedIn && clue !== undefined) {
-        letterClass += " " + clueClass(clue, guessClue);
+        let guessClass = guessClue !== undefined ? clueClass(guessClue, true) : ""
+        letterClass += " " + clueClass(clue) + " " + guessClass;
       }
       return (
         <td
