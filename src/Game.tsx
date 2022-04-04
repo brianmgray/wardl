@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { Row, RowState } from "./Row";
 import dictionary from "./data/dictionary.json";
-import { Clue, CluedLetter, clue, describeClue, violation } from "./clue";
+import { Clue, clue, describeClue, violation } from "./clue";
 import { Keyboard } from "./Keyboard";
 import {
   Difficulty, 
   describeSeed,
   speak,
-  findChangedLetterIndex,
   conditionalDebug
 } from "./util";
 import { Constants } from './constants'
@@ -63,7 +62,6 @@ function Game(props: GameProps) {
     conditionalDebug(`\t changing target 2: ${newTarget}`);
     setTarget(newTarget);
     setTargetHistory([newTarget]);
-    conditionalDebug(`setTargetHistory2: [${newTarget}]`);
     setHint("");
     setGuesses([]);
     setCurrentGuess("");
@@ -132,14 +130,15 @@ function Game(props: GameProps) {
       setGuesses((guesses) => guesses.concat([currentGuess]));
       setCurrentGuess((guess) => "");
 
-      const gameOver = (verbed: string) =>
-        `You ${verbed}! The final answer was ${target.toUpperCase()}.`
+      const gameOver = (verbed: string, target: string,  oldGuess: boolean = false) =>
+        `You ${verbed}! The final answer was ${target.toUpperCase()}` +
+        `${oldGuess ? ' which you guessed previously' : ''}.`
 
       if (currentGuess === target) {
-        setHint(gameOver("won"));
+        setHint(gameOver("won", target));
         setGameState(GameState.Won);
       } else if (guesses.length + 1 === props.maxGuesses) {
-        setHint(gameOver("lost"));
+        setHint(gameOver("lost", target));
         setGameState(GameState.Lost);
       } else {
         // advance the target
@@ -147,8 +146,14 @@ function Game(props: GameProps) {
         conditionalDebug(`\t changing target 3: ${newTarget}`);
         setTarget(newTarget);
         setTargetHistory([...targetHistory, newTarget])
-        setHint("");
-        speak(describeClue(clue(currentGuess, target)));
+        speak(describeClue(clue(currentGuess, newTarget)));
+        if (guesses.includes(newTarget)) {
+          // new target has been guessed, so consider this a win
+          setHint(() => gameOver("won", newTarget, true));
+          setGameState(GameState.Won);
+        } else {
+          setHint("");
+        }
       }
     }
   };
