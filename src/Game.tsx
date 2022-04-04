@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Row, RowState } from "./Row";
 import dictionary from "./data/dictionary.json";
-import { Clue, clue, describeClue, violation } from "./clue";
+import { Clue, clue, describeClue, violation, clueToEmoji } from "./clue";
 import { Keyboard } from "./Keyboard";
 import {
   Difficulty, 
@@ -260,14 +260,10 @@ function Game(props: GameProps) {
         {gameState !== GameState.Playing && (
           <button
           onClick={() => {
-            const emoji = props.colorBlind
-                ? ["⬛", "🟦", "🟧"]
-                : ["⬛", "🟨", "🟩"];
-                //TODO BG
               share("Result copied to clipboard!",
                 guesses
-                  .map((guess, i) => clue(guess, target, i > 1 ? targetHistory[i-1] : "", targetHistory[i])
-                  .map((c) => emoji[c.clue ?? 0])
+                  .map((guess, i) => clue(guess, target, targetHistory[i], i > 1 ? targetHistory[i-1] : "")
+                  .map(c => clueToEmoji(c, props.colorBlind))
                   .join("")
                 )
                 .join("\n"));

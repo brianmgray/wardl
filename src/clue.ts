@@ -1,6 +1,8 @@
 import { englishNumbers, findChangedLetterIndex, ordinal } from "./util";
 import { Difficulty } from './util'
 
+
+
 export enum Clue {
   Absent,
   Elsewhere,
@@ -13,6 +15,25 @@ export interface CluedLetter {
   guessClue?: Clue;       // compared to target at the time of the guess
   changed?: boolean;      // true if the letter changed for this round
 }
+
+interface EmojiMap {
+  [key: string]: string[]; // indexable
+}
+
+/**
+ * Object to look up emojis
+ *  - First key is true=colorblind, false=not
+ *  - Second key is "clue" vs "guess"
+ *  - Then an array of emojis mapping to Clue enum
+ */
+const EMOJIS_COLORBLIND: EmojiMap = {
+  "clue":  ["⬛", "🟦", "🟧"],
+  "guess": ["⬛", "🔵", "🟠"]
+};
+const EMOJIS: EmojiMap = {
+  "clue":  ["⬛", "🟨", "🟩"],
+  "guess": ["⬛", "🟡", "🟢"]
+};
 
 /**
  * Populate CluedLetters for a given guess
@@ -42,15 +63,12 @@ export function clue(word: string, target: string, guessTarget:string = "", prev
     };
     if (target[i] === letter) {
       answer.clue = Clue.Correct;
-      // return { clue: Clue.Correct, letter, changed: changed };
     } else if ((j = elusive.indexOf(letter)) > -1) {
       // "use it up" so we don't clue at it twice
       elusive[j] = "";
       answer.clue = Clue.Elsewhere;
-      // return { clue: Clue.Elsewhere, letter, changed: changed };
     } else {
       answer.clue = Clue.Absent;
-      // return { clue: Clue.Absent, letter, changed: changed };
     }
     return answer;
   });
@@ -130,4 +148,21 @@ export function violation(
     ++i;
   }
   return undefined;
+}
+
+/**
+ * Get the appropriate emoji for a clued letter
+ * @param cl 
+ * @param colorBlind 
+ */
+export function clueToEmoji(cl: CluedLetter, colorBlind: boolean = false): string {
+  const emojis = colorBlind ? EMOJIS_COLORBLIND : EMOJIS;
+  let guessKey = "clue";
+  let clue = cl.clue ?? Clue.Absent;
+  if (cl.guessClue !== undefined && cl.clue === Clue.Absent) {
+    // use the guess instead of the clue
+    guessKey = "guess"
+    clue = cl.guessClue;
+  }
+  return emojis[guessKey][clue];
 }
