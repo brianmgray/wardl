@@ -83,7 +83,7 @@ export function About() {
           rowState={RowState.LockedIn}
           wordLength={5}
           cluedLetters={[
-            { clue: Clue.Absent, letter: "s" },
+            { clue: Clue.Absent, letter: "s",  guessClue: Clue.Correct  },
             { clue: Clue.Correct, letter: "h" },
             { clue: Clue.Elsewhere, letter: "e" },
             { clue: Clue.Correct, letter: "l" },
@@ -108,14 +108,50 @@ export function About() {
         </tbody>
       </table>
       <p>
-        NOTE: You don't see the targets until the game ends. 
+        <strong>More info:</strong>
       </p>
-      <p>
-        The clues always relate to the current target. For example, when the target changed from 
-        "shale" to "whale", the <b className={"letter-correct"}>S</b> became an&nbsp;
-        <b className={"letter-absent guess-correct"}>S</b> because "S" was no longer in the correct place. It has 
-        a green border to remind you that it was correct for this row's target word.
-      </p>
+      <ul>
+        <li>You'll only see the targets after the game ends.</li>
+        <li>The clues always relate to the current target. In the example, 
+          <b className={"letter-absent"}>S</b> is no longer clued because it does not 
+          appear in the current target: <em>whale</em>.
+        </li>
+        <li>Borders around a letter indicate the guess was correct for the target at the time. In the example, 
+          <b className={"letter-absent guess-correct"}>S</b> has a <b className={"guess-correct"}>&nbsp;</b> 
+          highlight to remind you that the letter appeared in the correct place for the clue: <em>shale</em>.
+        </li>
+        <li>
+          It is possible to have a previous guess become totally correct as the target changes. In this case,
+          re-enter that guess for the win!
+          <table
+            className="Game-rows"
+            aria-label="Wardl correct historical guess">
+          <tbody>
+          <Row
+            rowState={RowState.LockedIn}
+            wordLength={5}
+            cluedLetters={[
+              { clue: Clue.Correct, letter: "w" },
+              { clue: Clue.Correct, letter: "h" },
+              { clue: Clue.Correct, letter: "a" },
+              { clue: Clue.Correct, letter: "l" },
+              { clue: Clue.Correct, letter: "e" },
+            ]}
+            showTargets={true}
+            target={'shale'}
+          />
+          <Row
+            rowState={RowState.Editing}
+            wordLength={5}
+            cluedLetters={[
+            ]}
+            showTargets={true}
+            target={'whale'}
+          />
+          </tbody>
+        </table>
+        </li>
+      </ul>
       <hr />
       <p>
         Report issues{" "}

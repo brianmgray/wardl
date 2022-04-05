@@ -147,13 +147,14 @@ function Game(props: GameProps) {
         setTarget(newTarget);
         setTargetHistory([...targetHistory, newTarget])
         speak(describeClue(clue(currentGuess, newTarget)));
-        if (guesses.includes(newTarget)) {
-          // new target has been guessed, so consider this a win
-          setHint(() => gameOver("won", newTarget, true));
-          setGameState(GameState.Won);
-        } else {
-          setHint("");
-        }
+        // Implementation to consider a correct historical guess a win
+        // if (guesses.includes(newTarget)) {
+        //   // new target has been guessed, so consider this a win
+        //   setHint(() => gameOver("won", newTarget, true));
+        //   setGameState(GameState.Won);
+        // } else {
+        setHint("");
+        // }
       }
     }
   };
