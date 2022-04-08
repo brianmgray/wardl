@@ -216,11 +216,22 @@ a:active {
   padding: 0px 4px;
 }
 
-.Game-seed-info {
+.Game-info {
+  /* display: flex; */
   opacity: 0.7;
   margin-top: 1em;
   font-variant-numeric: tabular-nums;
 }
+
+.Game-info div {
+  /* display: flex;
+  flex: 1 0;
+  margin: 0; */
+}
+
+.Game-wardl-num { }
+.Game-next { }
+.Game-num { }
 
 .Game-share {
   display: flex;

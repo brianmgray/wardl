@@ -5,7 +5,9 @@ import { Clue, clue, describeClue, violation, clueToEmoji } from "./clue";
 import { Keyboard } from "./Keyboard";
 import {
   Difficulty, 
-  describeSeed,
+  buildSeed,
+  wardlNumber,
+  nextWardl,
   speak,
   conditionalDebug
 } from "./util";
@@ -14,8 +16,9 @@ import TargetIndex from './targetIndex'
 import targets from "./data/targets.json";
 
 
-const todaySeed:string = new Date().toISOString().replace(/-/g, "").slice(0, 8);
-const targetIndex = new TargetIndex(targets, todaySeed);
+const seed = buildSeed(Constants.SEED_DATE);
+const targetIndex = new TargetIndex(targets, seed);
+conditionalDebug(`seed: ${seed}`)
 
 enum GameState {
   Playing,
@@ -254,8 +257,16 @@ function Game(props: GameProps) {
         letterInfo={letterInfo}
         onKey={onKey}
       />
-      <div className="Game-seed-info">
-        {`${describeSeed(todaySeed)} ${gameNumber > 1 ? " - Game " + gameNumber : ""}`}
+      <div className="Game-info">
+        <div className="Game-wardl-num">
+          #{(wardlNumber(Constants.LAUNCH_DATE, Constants.SEED_DATE))}
+        </div>
+        <div className="Game-next">
+          Next Wardl: {nextWardl(Constants.SEED_DATE)}
+        </div>
+        <div className="Game-num">
+          {gameNumber > 1 ? "Game " + gameNumber : ""}
+        </div>
       </div>
       <div className="Game-share">
         {gameState !== GameState.Playing && (
