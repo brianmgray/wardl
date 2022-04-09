@@ -1,21 +1,25 @@
 import { useEffect, useRef, useState } from "react";
-import { Row, RowState } from "./Row";
+
 import dictionary from "./data/dictionary.json";
-import { Clue, clue, describeClue, violation, clueToEmoji } from "./clue";
-import { Keyboard } from "./Keyboard";
-import {
-  Difficulty, 
-  describeSeed,
-  speak,
-  conditionalDebug
-} from "./util";
 import { Constants } from './constants'
 import TargetIndex from './targetIndex'
 import targets from "./data/targets.json";
 
+import { Row, RowState } from "./Row";
+import { Clue, clue, describeClue, violation, clueToEmoji } from "./clue";
+import { Keyboard } from "./Keyboard";
+import { GameInfo } from "./GameInfo";
+import {
+  Difficulty, 
+  buildSeed,
+  speak,
+  wardlNumber,
+  conditionalDebug
+} from "./util";
 
-const todaySeed:string = new Date().toISOString().replace(/-/g, "").slice(0, 8);
-const targetIndex = new TargetIndex(targets, todaySeed);
+const seed = buildSeed(Constants.SEED_DATE);
+const targetIndex = new TargetIndex(targets, seed);
+conditionalDebug(`seed: ${seed}`)
 
 enum GameState {
   Playing,
@@ -47,7 +51,7 @@ function Game(props: GameProps) {
     conditionalDebug(`\t changing target 1: ${newTarget}`);
     return newTarget;
   });
-  const [hint, setHint] = useState<string>(`Make your first guess!`);
+  const [hint, setHint] = useState<string>(``);
   const tableRef = useRef<HTMLTableElement>(null);
   const startNextGame = () => {
     if (challenge) {
@@ -70,8 +74,9 @@ function Game(props: GameProps) {
   };
 
   async function share(copiedHint: string, text?: string) {
-    const url = Constants.WARDLE_URL;
-    const body = url + (text ? "\n\n" + text : "");
+    const message = `${Constants.WARDLE_URL} ${wardlNumber(Constants.LAUNCH_DATE, Constants.SEED_DATE)} ` + 
+      `${guesses.length}/${Constants.MAX_GUESSES}`
+    const body = message + (text ? "\n" + text : "");
     if (
       /android|iphone|ipad|ipod|webos/i.test(navigator.userAgent) &&
       !/firefox/i.test(navigator.userAgent)
@@ -90,7 +95,7 @@ function Game(props: GameProps) {
     } catch (e) {
       console.warn("navigator.clipboard.writeText failed:", e);
     }
-    setHint(url);
+    setHint(message);
   }
 
   const onKey = (key: string) => {
@@ -254,9 +259,10 @@ function Game(props: GameProps) {
         letterInfo={letterInfo}
         onKey={onKey}
       />
-      <div className="Game-seed-info">
-        {`${describeSeed(todaySeed)} ${gameNumber > 1 ? " - Game " + gameNumber : ""}`}
-      </div>
+      <GameInfo 
+        launchDate={Constants.LAUNCH_DATE}
+        seedDate={Constants.SEED_DATE}
+        gameNumber={gameNumber} />
       <div className="Game-share">
         {gameState !== GameState.Playing && (
           <button

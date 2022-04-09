@@ -216,10 +216,37 @@ a:active {
   padding: 0px 4px;
 }
 
-.Game-seed-info {
+.Game-info {
+  display: flex;
   opacity: 0.7;
   margin-top: 1em;
   font-variant-numeric: tabular-nums;
+  justify-content: space-between;
+  align-items: center;
+}
+.Game-info div {
+  display: flex;
+  flex: 1;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.Game-info {
+  justify-content: flex-start;
+  text-align: left;
+  align-items: center;
+}
+.Game-next {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.Game-next h3 {
+  margin: 0;
+}
+.Game-num {
+  justify-content: flex-end;
+  text-align: right;
+  align-items: center;
 }
 
 .Game-share {
