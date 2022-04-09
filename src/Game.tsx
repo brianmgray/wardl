@@ -262,7 +262,7 @@ function Game(props: GameProps) {
           #{(wardlNumber(Constants.LAUNCH_DATE, Constants.SEED_DATE))}
         </div>
         <div className="Game-next">
-          Next Wardl: {nextWardl(Constants.SEED_DATE)}
+          <h3>Next&nbsp;Wardl:&nbsp;{nextWardl(Constants.SEED_DATE)}</h3>
         </div>
         <div className="Game-num">
           {gameNumber > 1 ? "Game " + gameNumber : ""}
