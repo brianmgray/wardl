@@ -8,11 +8,10 @@ import targets from "./data/targets.json";
 import { Row, RowState } from "./Row";
 import { Clue, clue, describeClue, violation, clueToEmoji } from "./clue";
 import { Keyboard } from "./Keyboard";
-import { Countdown } from "./Countdown";
+import { GameInfo } from "./GameInfo";
 import {
   Difficulty, 
   buildSeed,
-  wardlNumber,
   speak,
   conditionalDebug
 } from "./util";
@@ -258,17 +257,10 @@ function Game(props: GameProps) {
         letterInfo={letterInfo}
         onKey={onKey}
       />
-      <div className="Game-info">
-        <div className="Game-wardl-num">
-          #{(wardlNumber(Constants.LAUNCH_DATE, Constants.SEED_DATE))}
-        </div>
-        <div className="Game-next">
-          <Countdown seedDate={Constants.SEED_DATE} />
-        </div>
-        <div className="Game-num">
-          {gameNumber > 1 ? "Game " + gameNumber : ""}
-        </div>
-      </div>
+      <GameInfo 
+        launchDate={Constants.LAUNCH_DATE}
+        seedDate={Constants.SEED_DATE}
+        gameNumber={gameNumber} />
       <div className="Game-share">
         {gameState !== GameState.Playing && (
           <button
