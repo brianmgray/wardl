@@ -13,6 +13,7 @@ import {
   Difficulty, 
   buildSeed,
   speak,
+  wardlNumber,
   conditionalDebug
 } from "./util";
 
@@ -73,8 +74,9 @@ function Game(props: GameProps) {
   };
 
   async function share(copiedHint: string, text?: string) {
-    const url = Constants.WARDLE_URL;
-    const body = url + (text ? "\n\n" + text : "");
+    const message = `${Constants.WARDLE_URL} ${wardlNumber(Constants.LAUNCH_DATE, Constants.SEED_DATE)} ` + 
+      `${guesses.length}/${Constants.MAX_GUESSES}`
+    const body = message + (text ? "\n" + text : "");
     if (
       /android|iphone|ipad|ipod|webos/i.test(navigator.userAgent) &&
       !/firefox/i.test(navigator.userAgent)
@@ -93,7 +95,7 @@ function Game(props: GameProps) {
     } catch (e) {
       console.warn("navigator.clipboard.writeText failed:", e);
     }
-    setHint(url);
+    setHint(message);
   }
 
   const onKey = (key: string) => {
