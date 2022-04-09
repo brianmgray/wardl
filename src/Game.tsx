@@ -1,20 +1,21 @@
 import { useEffect, useRef, useState } from "react";
-import { Row, RowState } from "./Row";
+
 import dictionary from "./data/dictionary.json";
-import { Clue, clue, describeClue, violation, clueToEmoji } from "./clue";
-import { Keyboard } from "./Keyboard";
-import {
-  Difficulty, 
-  buildSeed,
-  wardlNumber,
-  nextWardl,
-  speak,
-  conditionalDebug
-} from "./util";
 import { Constants } from './constants'
 import TargetIndex from './targetIndex'
 import targets from "./data/targets.json";
 
+import { Row, RowState } from "./Row";
+import { Clue, clue, describeClue, violation, clueToEmoji } from "./clue";
+import { Keyboard } from "./Keyboard";
+import { Countdown } from "./Countdown";
+import {
+  Difficulty, 
+  buildSeed,
+  wardlNumber,
+  speak,
+  conditionalDebug
+} from "./util";
 
 const seed = buildSeed(Constants.SEED_DATE);
 const targetIndex = new TargetIndex(targets, seed);
@@ -262,7 +263,7 @@ function Game(props: GameProps) {
           #{(wardlNumber(Constants.LAUNCH_DATE, Constants.SEED_DATE))}
         </div>
         <div className="Game-next">
-          <h3>Next&nbsp;Wardl:&nbsp;{nextWardl(Constants.SEED_DATE)}</h3>
+          <Countdown seedDate={Constants.SEED_DATE} />
         </div>
         <div className="Game-num">
           {gameNumber > 1 ? "Game " + gameNumber : ""}

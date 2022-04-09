@@ -83,10 +83,10 @@ export function wardlNumber(launchDate:DateTime, seedDate:DateTime): number {
 /**
  * Which number wardl is this
  */
-export function nextWardl(seedDate:DateTime): string {
+export function nextWardl(): string {
+  let now = DateTime.now().setZone('Etc/GMT');
   let next = DateTime.now().setZone('Etc/GMT').plus({days:1}).set({hour:0, minute:0, second:0, millisecond: 0});
-  let duration = next.diff(seedDate, ["hours", "minutes", "seconds"]);
+  let duration = next.diff(now, ["hours", "minutes", "seconds"]);
   return duration.toFormat("hh:mm:ss", {floor: true});
-  // return `${duration.hours}:${duration.minutes}:${Math.floor(duration.seconds)}`;
 }
 
