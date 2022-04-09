@@ -50,7 +50,7 @@ function Game(props: GameProps) {
     conditionalDebug(`\t changing target 1: ${newTarget}`);
     return newTarget;
   });
-  const [hint, setHint] = useState<string>(`Make your first guess!`);
+  const [hint, setHint] = useState<string>(``);
   const tableRef = useRef<HTMLTableElement>(null);
   const startNextGame = () => {
     if (challenge) {
