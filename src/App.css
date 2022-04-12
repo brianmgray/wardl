@@ -216,6 +216,10 @@ a:active {
   padding: 0px 4px;
 }
 
+.App-new {
+
+}
+
 .Game-info {
   display: flex;
   opacity: 0.7;
@@ -309,7 +313,13 @@ a:active {
   right: 5px;
 }
 
-.emoji-link {
+.top-left {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+
+.icon-link {
   font-size: 24px;
   text-decoration: none;
   background: none;
@@ -317,6 +327,9 @@ a:active {
   padding: 0;
   cursor: pointer;
 }
+
+.new     .icon { color: black; }
+.updated .icon { color: #CC3363; }
 
 .top-right > * + * {
   margin-inline-start: 8px;

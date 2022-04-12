@@ -3,6 +3,12 @@ import { Constants } from "./constants";
 import Game from "./Game";
 import { useEffect, useState } from "react";
 import { About } from "./About";
+import { WhatsNew } from "./WhatsNew"
+
+// images for links
+import NewIcon from './assets/noun-new.png'
+
+
 
 function useSetting<T>(
   key: string,
@@ -27,7 +33,7 @@ function useSetting<T>(
 }
 
 function App() {
-  type Page = "game" | "about" | "settings";
+  type Page = "game" | "about" | "settings" | "new";
   const [page, setPage] = useState<Page>("game");
   const prefersDark =
     window.matchMedia &&
@@ -48,19 +54,22 @@ function App() {
       document.body.style.transition = "0.3s background-color ease-out";
     }, 1);
   }, [dark]);
-  const link = (emoji: string, label: string, page: Page) => (
+  const link = (icon: string, label: string, page: Page) => (
     <button
-      className="emoji-link"
+      className="icon-link"
       onClick={() => setPage(page)}
       title={label}
       aria-label={label}
     >
-      {emoji}
+      <img className="icon" src={icon} alt={label} width="25" />
     </button>
   );
 
   return (
     <div className={"App-container" + (colorBlind ? " color-blind" : "")}>
+      <div className="top-left new">
+        {link(NewIcon, "What's New", "new")}
+      </div>
       <h1>
         <span
           style={{
