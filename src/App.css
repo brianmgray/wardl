@@ -216,10 +216,6 @@ a:active {
   padding: 0px 4px;
 }
 
-.App-new {
-
-}
-
 .Game-info {
   display: flex;
   opacity: 0.7;
@@ -260,7 +256,9 @@ a:active {
 }
 
 .Game-share button {
-  gap: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   display: flex;
   font-size: 20px;
   padding: .4em;

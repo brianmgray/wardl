@@ -163,14 +163,6 @@ export function About() {
         but you can <a href="https://www.paypal.com/paypalme/bmgray84">buy&nbsp;me&nbsp;a&nbsp;coffee</a> if
         you'd like.
       </p>
-      <p>
-        <strong>Credits:</strong>
-        <ul>
-          <li>"New" icon by by jiskan427 from 
-            <a href="http://thenounproject.com" target="_blank" rel="noreferrer">NounProject.com</a>
-          </li>
-        </ul>
-      </p>
     </div>
   );
 }

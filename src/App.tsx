@@ -1,14 +1,18 @@
+import { useEffect, useState } from "react";
+import { library, IconProp } from '@fortawesome/fontawesome-svg-core'
+import { faGear, faCircleExclamation, faShare, faBook } from '@fortawesome/free-solid-svg-icons'
+import { faCircleXmark, faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import "./App.css";
 import { Constants } from "./constants";
 import Game from "./Game";
-import { useEffect, useState } from "react";
 import { About } from "./About";
 import { WhatsNew } from "./WhatsNew"
 
-// images for links
-import NewIcon from './assets/noun-new.png'
-
-
+// setup font-awesome library - these will now be available by string
+// see: https://fontawesome.com/v6/docs/web/use-with/react/add-icons#add-icons-globally
+library.add(faQuestionCircle, faCircleXmark, faGear, faBook, faCircleExclamation, faShare)
 
 function useSetting<T>(
   key: string,
@@ -54,21 +58,21 @@ function App() {
       document.body.style.transition = "0.3s background-color ease-out";
     }, 1);
   }, [dark]);
-  const link = (icon: string, label: string, page: Page) => (
+  const link = (iconProp: IconProp, label: string, page: Page) => (
     <button
       className="icon-link"
       onClick={() => setPage(page)}
       title={label}
       aria-label={label}
     >
-      <img className="icon" src={icon} alt={label} width="25" />
+      <FontAwesomeIcon icon={iconProp} />
     </button>
   );
 
   return (
     <div className={"App-container" + (colorBlind ? " color-blind" : "")}>
       <div className="top-left new">
-        {link(NewIcon, "What's New", "new")}
+        {link("book", "What's New", "new")}
       </div>
       <h1>
         <span
@@ -82,11 +86,11 @@ function App() {
       </h1>
       <div className="top-right">
         {page !== "game" ? (
-          link("✗", "Close", "game")
+          link(["far", "circle-xmark"], "Close", "game")
         ) : (
           <>
-            {link("?", "About", "about")}
-            {link("⚙️", "Settings", "settings")}
+            {link(["far", "question-circle"], "About", "about")}
+            {link("gear", "Settings", "settings")}
           </>
         )}
       </div>
