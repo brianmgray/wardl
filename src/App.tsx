@@ -9,6 +9,8 @@ import { Constants } from "./constants";
 import Game from "./Game";
 import { About } from "./About";
 import { WhatsNew } from "./WhatsNew"
+import { DateTime } from "luxon";
+import { conditionalDebug } from "./util";
 
 // setup font-awesome library - these will now be available by string
 // see: https://fontawesome.com/v6/docs/web/use-with/react/add-icons#add-icons-globally
@@ -50,6 +52,8 @@ function App() {
     "qwertyuiop-asdfghjkl-EzxcvbnmB"
   );
   const [enterRight, setEnterRight] = useSetting<boolean>("enter-right", false);
+  const [lastWhatsNewCheck, setLastWhatsNewCheck] = useSetting<DateTime>("whats-new-check", 
+    DateTime.fromObject({year: 0, month: 1, day: 1}, { zone: 'Etc/GMT' }));
 
   useEffect(() => {
     document.body.className = dark ? "dark" : "";
@@ -71,7 +75,7 @@ function App() {
 
   return (
     <div className={"App-container" + (colorBlind ? " color-blind" : "")}>
-      <div className="top-left new">
+      <div className={"top-left new" + (Constants.WHATS_NEW_LATEST_DATE > lastWhatsNewCheck ? " updated" : "")}>
         {link("book", "What's New", "new")}
       </div>
       <h1>
@@ -95,6 +99,9 @@ function App() {
         )}
       </div>
       {page === "about" && <About />}
+      {page === "new" && 
+        <WhatsNew contentLoadedCallback={setLastWhatsNewCheck} />
+        }
       {page === "settings" && (
         <div className="Settings">
           <div className="Settings-setting">

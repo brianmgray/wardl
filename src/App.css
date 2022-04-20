@@ -326,8 +326,8 @@ a:active {
   cursor: pointer;
 }
 
-.new     .icon { color: black; }
-.updated .icon { color: #CC3363; }
+.top-left.new     svg { color: black; }
+.top-left.updated svg { color: #CC3363; }
 
 .top-right > * + * {
   margin-inline-start: 8px;
