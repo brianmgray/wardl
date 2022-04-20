@@ -1,8 +1,20 @@
+import { useEffect, useState } from "react";
+import { library, IconProp } from '@fortawesome/fontawesome-svg-core'
+import { faGear, faCircleExclamation, faShare, faBook } from '@fortawesome/free-solid-svg-icons'
+import { faCircleXmark, faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import "./App.css";
 import { Constants } from "./constants";
 import Game from "./Game";
-import { useEffect, useState } from "react";
 import { About } from "./About";
+import { WhatsNew } from "./WhatsNew"
+import { DateTime } from "luxon";
+import { conditionalDebug } from "./util";
+
+// setup font-awesome library - these will now be available by string
+// see: https://fontawesome.com/v6/docs/web/use-with/react/add-icons#add-icons-globally
+library.add(faQuestionCircle, faCircleXmark, faGear, faBook, faCircleExclamation, faShare)
 
 function useSetting<T>(
   key: string,
@@ -27,7 +39,7 @@ function useSetting<T>(
 }
 
 function App() {
-  type Page = "game" | "about" | "settings";
+  type Page = "game" | "about" | "settings" | "new";
   const [page, setPage] = useState<Page>("game");
   const prefersDark =
     window.matchMedia &&
@@ -40,6 +52,8 @@ function App() {
     "qwertyuiop-asdfghjkl-EzxcvbnmB"
   );
   const [enterRight, setEnterRight] = useSetting<boolean>("enter-right", false);
+  const [lastWhatsNewCheck, setLastWhatsNewCheck] = useSetting<DateTime>("whats-new-check", 
+    DateTime.fromObject({year: 0, month: 1, day: 1}, { zone: 'Etc/GMT' }));
 
   useEffect(() => {
     document.body.className = dark ? "dark" : "";
@@ -48,19 +62,22 @@ function App() {
       document.body.style.transition = "0.3s background-color ease-out";
     }, 1);
   }, [dark]);
-  const link = (emoji: string, label: string, page: Page) => (
+  const link = (iconProp: IconProp, label: string, page: Page) => (
     <button
-      className="emoji-link"
+      className="icon-link"
       onClick={() => setPage(page)}
       title={label}
       aria-label={label}
     >
-      {emoji}
+      <FontAwesomeIcon icon={iconProp} />
     </button>
   );
 
   return (
     <div className={"App-container" + (colorBlind ? " color-blind" : "")}>
+      <div className={"top-left new" + (Constants.WHATS_NEW_LATEST_DATE > lastWhatsNewCheck ? " updated" : "")}>
+        {link("book", "What's New", "new")}
+      </div>
       <h1>
         <span
           style={{
@@ -73,15 +90,18 @@ function App() {
       </h1>
       <div className="top-right">
         {page !== "game" ? (
-          link("✗", "Close", "game")
+          link(["far", "circle-xmark"], "Close", "game")
         ) : (
           <>
-            {link("?", "About", "about")}
-            {link("⚙️", "Settings", "settings")}
+            {link(["far", "question-circle"], "About", "about")}
+            {link("gear", "Settings", "settings")}
           </>
         )}
       </div>
       {page === "about" && <About />}
+      {page === "new" && 
+        <WhatsNew contentLoadedCallback={setLastWhatsNewCheck} />
+        }
       {page === "settings" && (
         <div className="Settings">
           <div className="Settings-setting">

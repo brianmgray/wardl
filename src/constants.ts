@@ -11,5 +11,7 @@ export const Constants = {
   MAX_GUESSES: 6,
   WORD_LENGTH: 5,
   WARDLE_URL: "wardl.co",
-  LAUNCH_DATE: DateTime.fromObject({year: 2022, month: 3, day: 8 }, { zone: 'Etc/GMT' })
+  LAUNCH_DATE: DateTime.fromObject({year: 2022, month: 3, day: 8 }, { zone: 'Etc/GMT' }),
+  WHATS_NEW_LATEST_DATE: DateTime.fromObject({year: 2022, month: 3, day: 10 }, { zone: 'Etc/GMT' }),
+  CONTENT_WHATS_NEW: "whats-new.md"
 }
