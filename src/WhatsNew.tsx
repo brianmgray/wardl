@@ -29,7 +29,7 @@ export function WhatsNew(props: WhatsNewProps) {
   }, []);
 
   return (
-    <div className="App-new">
+    <div className="New-container">
       <ReactMarkdown children={content} />
     </div>
   );

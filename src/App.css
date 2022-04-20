@@ -326,7 +326,6 @@ a:active {
   cursor: pointer;
 }
 
-.top-left.new     svg { color: black; }
 .top-left.updated svg { color: #CC3363; }
 
 .top-right > * + * {
@@ -347,5 +346,21 @@ a:active {
 }
 .App-container.color-blind .guess-elsewhere {
   border: 3px solid #85c0f9;
+}
+
+.New-container {
+  text-align: left;
+}
+
+.New-container h2 {
+  text-align: center;
+  border: 2px solid rgb(87, 172, 120);
+  background-color: rgb(87, 172, 120);
+  padding: 5px;
+  color: white;
+}
+
+body.dark .New-container h2 {
+  color: black;
 }
 
